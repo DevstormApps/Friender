@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0424AB9420F8C8D2006DF2F5 /* EventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424AB9320F8C8D2006DF2F5 /* EventsVC.swift */; };
+		0424AB9620F8C92B006DF2F5 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424AB9520F8C92B006DF2F5 /* EventCell.swift */; };
+		043FC8D220FFC6150053EC28 /* EeventDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FC8D120FFC6150053EC28 /* EeventDataService.swift */; };
 		0452D42E20517AE70093F72B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D42D20517AE70093F72B /* MapVC.swift */; };
+		045F203C2100FCB70007C703 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F203B2100FCB60007C703 /* AuthVC.swift */; };
+		045F203E2100FDC80007C703 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045F203D2100FDC70007C703 /* GoogleService-Info.plist */; };
+		045F2041210102A10007C703 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F2040210102A10007C703 /* DataService.swift */; };
+		045F2043210107550007C703 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F2042210107550007C703 /* AuthService.swift */; };
 		04F0BAF920507D4300221642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0BAF820507D4300221642 /* AppDelegate.swift */; };
-		04F0BAFB20507D4400221642 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0BAFA20507D4400221642 /* AuthVC.swift */; };
 		04F0BAFE20507D4400221642 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BAFC20507D4400221642 /* Main.storyboard */; };
 		04F0BB0020507D4500221642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BAFF20507D4500221642 /* Assets.xcassets */; };
 		04F0BB0320507D4500221642 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BB0120507D4500221642 /* LaunchScreen.storyboard */; };
@@ -17,10 +23,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0424AB9320F8C8D2006DF2F5 /* EventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsVC.swift; sourceTree = "<group>"; };
+		0424AB9520F8C92B006DF2F5 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		043FC8D120FFC6150053EC28 /* EeventDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EeventDataService.swift; sourceTree = "<group>"; };
 		0452D42D20517AE70093F72B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		045F203B2100FCB60007C703 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
+		045F203D2100FDC70007C703 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		045F2040210102A10007C703 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		045F2042210107550007C703 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		04F0BAF520507D4300221642 /* Friender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Friender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F0BAF820507D4300221642 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		04F0BAFA20507D4400221642 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		04F0BAFD20507D4400221642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04F0BAFF20507D4500221642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04F0BB0220507D4500221642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,6 +54,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043FC8CD20FFC51F0053EC28 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				043FC8D120FFC6150053EC28 /* EeventDataService.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		043FC8CE20FFC5230053EC28 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0424AB9520F8C92B006DF2F5 /* EventCell.swift */,
+			);
+			name = View;
+			path = "New Group/New Group";
+			sourceTree = "<group>";
+		};
+		043FC8D020FFC57C0053EC28 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04F0BAF820507D4300221642 /* AppDelegate.swift */,
+				0452D42D20517AE70093F72B /* MapVC.swift */,
+				0424AB9320F8C8D2006DF2F5 /* EventsVC.swift */,
+				045F203B2100FCB60007C703 /* AuthVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		045F203F210101AD0007C703 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				045F2040210102A10007C703 /* DataService.swift */,
+				045F2042210107550007C703 /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		04F0BAEC20507D3F00221642 = {
 			isa = PBXGroup;
 			children = (
@@ -63,13 +112,15 @@
 		04F0BAF720507D4300221642 /* Friender */ = {
 			isa = PBXGroup;
 			children = (
-				04F0BAF820507D4300221642 /* AppDelegate.swift */,
-				0452D42D20517AE70093F72B /* MapVC.swift */,
-				04F0BAFA20507D4400221642 /* AuthVC.swift */,
+				045F203F210101AD0007C703 /* Services */,
+				043FC8CD20FFC51F0053EC28 /* Model */,
+				043FC8CE20FFC5230053EC28 /* View */,
+				043FC8D020FFC57C0053EC28 /* Controller */,
 				04F0BAFC20507D4400221642 /* Main.storyboard */,
 				04F0BAFF20507D4500221642 /* Assets.xcassets */,
 				04F0BB0120507D4500221642 /* LaunchScreen.storyboard */,
 				04F0BB0420507D4500221642 /* Info.plist */,
+				045F203D2100FDC70007C703 /* GoogleService-Info.plist */,
 			);
 			path = Friender;
 			sourceTree = "<group>";
@@ -121,7 +172,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = storm;
 				TargetAttributes = {
 					04F0BAF420507D4100221642 = {
@@ -154,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F0BB0320507D4500221642 /* LaunchScreen.storyboard in Resources */,
+				045F203E2100FDC80007C703 /* GoogleService-Info.plist in Resources */,
 				04F0BB0020507D4500221642 /* Assets.xcassets in Resources */,
 				04F0BAFE20507D4400221642 /* Main.storyboard in Resources */,
 			);
@@ -186,9 +238,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Friender/Pods-Friender-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -222,9 +283,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04F0BAFB20507D4400221642 /* AuthVC.swift in Sources */,
+				045F203C2100FCB70007C703 /* AuthVC.swift in Sources */,
+				045F2041210102A10007C703 /* DataService.swift in Sources */,
 				0452D42E20517AE70093F72B /* MapVC.swift in Sources */,
+				0424AB9620F8C92B006DF2F5 /* EventCell.swift in Sources */,
 				04F0BAF920507D4300221642 /* AppDelegate.swift in Sources */,
+				043FC8D220FFC6150053EC28 /* EeventDataService.swift in Sources */,
+				0424AB9420F8C8D2006DF2F5 /* EventsVC.swift in Sources */,
+				045F2043210107550007C703 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +330,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -271,6 +338,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -321,6 +389,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -328,6 +397,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -363,10 +433,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L2DEW8R5TW;
+				DEVELOPMENT_TEAM = 7JP8N4YCJM;
 				INFOPLIST_FILE = Friender/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.storm.Friender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Mosab.Friender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -379,10 +449,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L2DEW8R5TW;
+				DEVELOPMENT_TEAM = 7JP8N4YCJM;
 				INFOPLIST_FILE = Friender/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.storm.Friender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Mosab.Friender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

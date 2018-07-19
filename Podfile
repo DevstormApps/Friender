@@ -6,7 +6,8 @@ target 'Friender' do
   use_frameworks!
 
   # Pods for Friender
-    pod 'GoogleMaps'
-    pod 'GooglePlaces'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
 
 end

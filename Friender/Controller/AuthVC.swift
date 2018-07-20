@@ -18,13 +18,14 @@ class AuthVC: UIViewController {
         super.viewDidLoad()
         emailField.delegate = self
         passwordField.delegate = self
+        self.hideKeyboardWhenTappedAround()
     }
 
     @IBAction func loginButtonWasPressed(_ sender: Any) {
         if emailField != nil || passwordField != nil {
             AuthService.instance.loginUser(email: emailField.text!, password: passwordField.text!) { (success, loginError) in
                 if success {
-                    self.dismiss(animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "goToTabBar", sender: self)
                 } else {
                     print(String(describing:loginError?.localizedDescription))
                 }
@@ -32,6 +33,7 @@ class AuthVC: UIViewController {
                 AuthService.instance.registerUser(email: self.emailField.text!, password: self.passwordField.text!, userCreationComplete: { (success, registerError) in
                     if success {
                         AuthService.instance.loginUser(email: self.emailField.text!, password: self.passwordField.text!, loginComplete: { (success, nil) in
+                            self.performSegue(withIdentifier: "goToTabBar", sender: self)
                             print("Successfully registered user")
                         })
                     } else {
@@ -48,3 +50,16 @@ extension AuthVC: UITextFieldDelegate {
     
     
 }
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0424AB9420F8C8D2006DF2F5 /* EventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424AB9320F8C8D2006DF2F5 /* EventsVC.swift */; };
 		0424AB9620F8C92B006DF2F5 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424AB9520F8C92B006DF2F5 /* EventCell.swift */; };
+		0435CB7D21016A8700A22286 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7421016A8600A22286 /* GeoFire.m */; };
+		0435CB7E21016A8700A22286 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7621016A8600A22286 /* GFBase32Utils.m */; };
+		0435CB7F21016A8700A22286 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7821016A8600A22286 /* GFGeoHash.m */; };
+		0435CB8021016A8700A22286 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7A21016A8600A22286 /* GFGeoHashQuery.m */; };
+		0435CB8121016A8700A22286 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7C21016A8600A22286 /* GFQuery.m */; };
 		043FC8D220FFC6150053EC28 /* EeventDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FC8D120FFC6150053EC28 /* EeventDataService.swift */; };
 		0452D42E20517AE70093F72B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D42D20517AE70093F72B /* MapVC.swift */; };
 		045F203C2100FCB70007C703 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F203B2100FCB60007C703 /* AuthVC.swift */; };
@@ -25,6 +30,22 @@
 /* Begin PBXFileReference section */
 		0424AB9320F8C8D2006DF2F5 /* EventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsVC.swift; sourceTree = "<group>"; };
 		0424AB9520F8C92B006DF2F5 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		0435CB6D21016A8600A22286 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		0435CB6E21016A8600A22286 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		0435CB6F21016A8600A22286 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		0435CB7021016A8600A22286 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		0435CB7121016A8600A22286 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		0435CB7321016A8600A22286 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		0435CB7421016A8600A22286 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		0435CB7521016A8600A22286 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		0435CB7621016A8600A22286 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		0435CB7721016A8600A22286 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		0435CB7821016A8600A22286 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		0435CB7921016A8600A22286 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		0435CB7A21016A8600A22286 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		0435CB7B21016A8600A22286 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
+		0435CB7C21016A8600A22286 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
+		0435CB8221016CBD00A22286 /* Friender-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Friender-Bridging-Header.h"; sourceTree = "<group>"; };
 		043FC8D120FFC6150053EC28 /* EeventDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EeventDataService.swift; sourceTree = "<group>"; };
 		0452D42D20517AE70093F72B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		045F203B2100FCB60007C703 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
@@ -54,6 +75,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0435CB6B21016A8600A22286 /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				0435CB6C21016A8600A22286 /* API */,
+				0435CB7121016A8600A22286 /* GeoFire-Prefix.pch */,
+				0435CB7221016A8600A22286 /* Implementation */,
+			);
+			path = GeoFire;
+			sourceTree = "<group>";
+		};
+		0435CB6C21016A8600A22286 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0435CB6D21016A8600A22286 /* GeoFire.h */,
+				0435CB6E21016A8600A22286 /* GFCircleQuery.h */,
+				0435CB6F21016A8600A22286 /* GFQuery.h */,
+				0435CB7021016A8600A22286 /* GFRegionQuery.h */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0435CB7221016A8600A22286 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				0435CB7321016A8600A22286 /* GeoFire+Private.h */,
+				0435CB7421016A8600A22286 /* GeoFire.m */,
+				0435CB7521016A8600A22286 /* GFBase32Utils.h */,
+				0435CB7621016A8600A22286 /* GFBase32Utils.m */,
+				0435CB7721016A8600A22286 /* GFGeoHash.h */,
+				0435CB7821016A8600A22286 /* GFGeoHash.m */,
+				0435CB7921016A8600A22286 /* GFGeoHashQuery.h */,
+				0435CB7A21016A8600A22286 /* GFGeoHashQuery.m */,
+				0435CB7B21016A8600A22286 /* GFQuery+Private.h */,
+				0435CB7C21016A8600A22286 /* GFQuery.m */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
 		043FC8CD20FFC51F0053EC28 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +171,7 @@
 		04F0BAF720507D4300221642 /* Friender */ = {
 			isa = PBXGroup;
 			children = (
+				0435CB6B21016A8600A22286 /* GeoFire */,
 				045F203F210101AD0007C703 /* Services */,
 				043FC8CD20FFC51F0053EC28 /* Model */,
 				043FC8CE20FFC5230053EC28 /* View */,
@@ -119,6 +179,7 @@
 				04F0BAFC20507D4400221642 /* Main.storyboard */,
 				04F0BAFF20507D4500221642 /* Assets.xcassets */,
 				04F0BB0120507D4500221642 /* LaunchScreen.storyboard */,
+				0435CB8221016CBD00A22286 /* Friender-Bridging-Header.h */,
 				04F0BB0420507D4500221642 /* Info.plist */,
 				045F203D2100FDC70007C703 /* GoogleService-Info.plist */,
 			);
@@ -288,9 +349,14 @@
 				0452D42E20517AE70093F72B /* MapVC.swift in Sources */,
 				0424AB9620F8C92B006DF2F5 /* EventCell.swift in Sources */,
 				04F0BAF920507D4300221642 /* AppDelegate.swift in Sources */,
+				0435CB8021016A8700A22286 /* GFGeoHashQuery.m in Sources */,
 				043FC8D220FFC6150053EC28 /* EeventDataService.swift in Sources */,
+				0435CB7E21016A8700A22286 /* GFBase32Utils.m in Sources */,
+				0435CB7F21016A8700A22286 /* GFGeoHash.m in Sources */,
 				0424AB9420F8C8D2006DF2F5 /* EventsVC.swift in Sources */,
 				045F2043210107550007C703 /* AuthService.swift in Sources */,
+				0435CB7D21016A8700A22286 /* GeoFire.m in Sources */,
+				0435CB8121016A8700A22286 /* GFQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Mosab.Friender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Friender/Friender-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -454,6 +521,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Mosab.Friender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Friender/Friender-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

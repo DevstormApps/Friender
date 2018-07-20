@@ -18,6 +18,8 @@ class MapVC: UIViewController {
     let authorizationStatus = CLLocationManager.authorizationStatus()
     let regionRadius: Double = 1000
     
+    var geoFire: GeoFire!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self

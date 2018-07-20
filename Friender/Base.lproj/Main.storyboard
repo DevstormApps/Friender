@@ -22,8 +22,18 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpq-vJ-V4N">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Yf-1T-a3W">
+                                        <rect key="frame" x="130.5" y="30" width="59" height="22"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="3Yf-1T-a3W" firstAttribute="top" secondItem="lpq-vJ-V4N" secondAttribute="top" constant="30" id="YtD-TJ-ExR"/>
+                                    <constraint firstItem="3Yf-1T-a3W" firstAttribute="centerX" secondItem="lpq-vJ-V4N" secondAttribute="centerX" id="nlP-n6-QRf"/>
                                     <constraint firstAttribute="height" constant="70" id="w4b-XV-9o6"/>
                                 </constraints>
                             </view>

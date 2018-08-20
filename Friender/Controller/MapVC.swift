@@ -9,57 +9,92 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseDatabase
+import Firebase
+import FirebaseStorage
 
-class MapVC: UIViewController {
+class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
     var locationManager = CLLocationManager()
     let authorizationStatus = CLLocationManager.authorizationStatus()
-    let regionRadius: Double = 1000
+    var regionRadius: Double = 1000
+    var mapHasCenteredOnce = false
+    var userLocation = CLLocationCoordinate2D()
+    
     
     var geoFire: GeoFire!
+    var geofireRef: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
+        mapView.userTrackingMode = MKUserTrackingMode.follow
+        geofireRef = Database.database().reference()
+        geoFire = GeoFire(firebaseRef: geofireRef)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        locationAuthStatus()
+    }
+    
+    func prepareLocationManager() {
         locationManager.delegate = self
-        configureLocationServices()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locationManager.location?.coordinate {
+            userLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: regionRadius * 2, longitudeDelta: regionRadius * 2))
+            
+            mapView.setRegion(region, animated: true)
+            
+            mapView.removeAnnotations(mapView.annotations)
+            
+            let anno = MKPointAnnotation()
+            anno.coordinate = userLocation
+            anno.title = "thisLocation"
+            
+            mapView.addAnnotation(anno)
+        }
         
     }
-
+    
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func centerMapOnLocation(_ location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2, regionRadius * 2)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
+     
+    }
+    
+    
     @IBAction func addEventBtnWasPressed(_ sender: Any) {
+        
+       
     }
     
     @IBAction func centerMapBtnWasPressed(_ sender: Any) {
-        if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
-            centerMapOnUserLocation()
-            
-        }
-    }
-    
+       
+
 }
 
-extension MapVC: MKMapViewDelegate {
-    func centerMapOnUserLocation() {
-        guard let coordinate = locationManager.location?.coordinate else { return }
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0 , regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-}
 
-extension MapVC: CLLocationManagerDelegate {
-    func configureLocationServices() {
-        if authorizationStatus == .notDetermined {
-            locationManager.requestAlwaysAuthorization()
-        } else {
-            return
-        }
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        centerMapOnUserLocation()
-    }
-    
+
+
 }

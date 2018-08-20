@@ -14,12 +14,15 @@
 		0435CB7F21016A8700A22286 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7821016A8600A22286 /* GFGeoHash.m */; };
 		0435CB8021016A8700A22286 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7A21016A8600A22286 /* GFGeoHashQuery.m */; };
 		0435CB8121016A8700A22286 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7C21016A8600A22286 /* GFQuery.m */; };
-		043FC8D220FFC6150053EC28 /* EeventDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FC8D120FFC6150053EC28 /* EeventDataService.swift */; };
+		043FC8D220FFC6150053EC28 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FC8D120FFC6150053EC28 /* EventHandler.swift */; };
 		0452D42E20517AE70093F72B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D42D20517AE70093F72B /* MapVC.swift */; };
-		045F203C2100FCB70007C703 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F203B2100FCB60007C703 /* AuthVC.swift */; };
+		045F203C2100FCB70007C703 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F203B2100FCB60007C703 /* SignUpVC.swift */; };
 		045F203E2100FDC80007C703 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045F203D2100FDC70007C703 /* GoogleService-Info.plist */; };
-		045F2041210102A10007C703 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F2040210102A10007C703 /* DataService.swift */; };
-		045F2043210107550007C703 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F2042210107550007C703 /* AuthService.swift */; };
+		04C966822122F12A00743E76 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966812122F12A00743E76 /* User.swift */; };
+		04C9668421230EEA00743E76 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9668321230EEA00743E76 /* DatabaseService.swift */; };
+		04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */; };
+		04C966892128587A00743E76 /* PopupViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966882128587A00743E76 /* PopupViewVC.swift */; };
+		04C9668B2129C12000743E76 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9668A2129C12000743E76 /* TabBarVC.swift */; };
 		04F0BAF920507D4300221642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0BAF820507D4300221642 /* AppDelegate.swift */; };
 		04F0BAFE20507D4400221642 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BAFC20507D4400221642 /* Main.storyboard */; };
 		04F0BB0020507D4500221642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BAFF20507D4500221642 /* Assets.xcassets */; };
@@ -46,12 +49,15 @@
 		0435CB7B21016A8600A22286 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
 		0435CB7C21016A8600A22286 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		0435CB8221016CBD00A22286 /* Friender-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Friender-Bridging-Header.h"; sourceTree = "<group>"; };
-		043FC8D120FFC6150053EC28 /* EeventDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EeventDataService.swift; sourceTree = "<group>"; };
+		043FC8D120FFC6150053EC28 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		0452D42D20517AE70093F72B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
-		045F203B2100FCB60007C703 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
+		045F203B2100FCB60007C703 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		045F203D2100FDC70007C703 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		045F2040210102A10007C703 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		045F2042210107550007C703 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		04C966812122F12A00743E76 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		04C9668321230EEA00743E76 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		04C966882128587A00743E76 /* PopupViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewVC.swift; sourceTree = "<group>"; };
+		04C9668A2129C12000743E76 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		04F0BAF520507D4300221642 /* Friender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Friender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F0BAF820507D4300221642 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04F0BAFD20507D4400221642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,7 +122,8 @@
 		043FC8CD20FFC51F0053EC28 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				043FC8D120FFC6150053EC28 /* EeventDataService.swift */,
+				04C966812122F12A00743E76 /* User.swift */,
+				043FC8D120FFC6150053EC28 /* EventHandler.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				0424AB9520F8C92B006DF2F5 /* EventCell.swift */,
+				04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */,
 			);
 			name = View;
 			path = "New Group/New Group";
@@ -136,18 +144,20 @@
 				04F0BAF820507D4300221642 /* AppDelegate.swift */,
 				0452D42D20517AE70093F72B /* MapVC.swift */,
 				0424AB9320F8C8D2006DF2F5 /* EventsVC.swift */,
-				045F203B2100FCB60007C703 /* AuthVC.swift */,
+				045F203B2100FCB60007C703 /* SignUpVC.swift */,
+				04C966882128587A00743E76 /* PopupViewVC.swift */,
+				04C9668A2129C12000743E76 /* TabBarVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		045F203F210101AD0007C703 /* Services */ = {
+		04C966852126C95000743E76 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				045F2040210102A10007C703 /* DataService.swift */,
-				045F2042210107550007C703 /* AuthService.swift */,
+				04C9668321230EEA00743E76 /* DatabaseService.swift */,
 			);
-			path = Services;
+			name = Services;
+			path = "New Group1";
 			sourceTree = "<group>";
 		};
 		04F0BAEC20507D3F00221642 = {
@@ -172,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				0435CB6B21016A8600A22286 /* GeoFire */,
-				045F203F210101AD0007C703 /* Services */,
+				04C966852126C95000743E76 /* Services */,
 				043FC8CD20FFC51F0053EC28 /* Model */,
 				043FC8CE20FFC5230053EC28 /* View */,
 				043FC8D020FFC57C0053EC28 /* Controller */,
@@ -239,6 +249,11 @@
 					04F0BAF420507D4100221642 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -300,6 +315,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Friender/Pods-Friender-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -307,6 +323,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -324,13 +341,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Friender/Pods-Friender-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -344,18 +359,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				045F203C2100FCB70007C703 /* AuthVC.swift in Sources */,
-				045F2041210102A10007C703 /* DataService.swift in Sources */,
+				045F203C2100FCB70007C703 /* SignUpVC.swift in Sources */,
 				0452D42E20517AE70093F72B /* MapVC.swift in Sources */,
 				0424AB9620F8C92B006DF2F5 /* EventCell.swift in Sources */,
 				04F0BAF920507D4300221642 /* AppDelegate.swift in Sources */,
 				0435CB8021016A8700A22286 /* GFGeoHashQuery.m in Sources */,
-				043FC8D220FFC6150053EC28 /* EeventDataService.swift in Sources */,
+				043FC8D220FFC6150053EC28 /* EventHandler.swift in Sources */,
 				0435CB7E21016A8700A22286 /* GFBase32Utils.m in Sources */,
+				04C966892128587A00743E76 /* PopupViewVC.swift in Sources */,
 				0435CB7F21016A8700A22286 /* GFGeoHash.m in Sources */,
+				04C966822122F12A00743E76 /* User.swift in Sources */,
+				04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */,
+				04C9668421230EEA00743E76 /* DatabaseService.swift in Sources */,
 				0424AB9420F8C8D2006DF2F5 /* EventsVC.swift in Sources */,
-				045F2043210107550007C703 /* AuthService.swift in Sources */,
 				0435CB7D21016A8700A22286 /* GeoFire.m in Sources */,
+				04C9668B2129C12000743E76 /* TabBarVC.swift in Sources */,
 				0435CB8121016A8700A22286 /* GFQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

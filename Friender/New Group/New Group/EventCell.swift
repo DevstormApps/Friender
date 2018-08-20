@@ -10,9 +10,13 @@ import UIKit
 
 class EventCell: UICollectionViewCell {
     
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventImage: UIImageView!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.eventImage.image = nil
+        self.eventTitle.text = nil
+    }
     
 }

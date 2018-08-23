@@ -18,7 +18,7 @@ class EventCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         scrollDirection = .horizontal
         minimumLineSpacing = 40
-        itemSize = CGSize(width: 150, height: 150)
+        itemSize = CGSize(width: 200, height: 300)
     }
     
     required init?(coder aDecoder: NSCoder) {

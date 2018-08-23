@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                         print("Sucessfully logged in to Firebase with Google", uid)
                         //sends user to homepage VC after a successful login
                         let myStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let homePage = myStoryboard.instantiateViewController(withIdentifier: "goToEvents") as! EventsVC
+                        let homePage = myStoryboard.instantiateViewController(withIdentifier: "TabBar") as! TabBarVC
                         
                         
                         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate

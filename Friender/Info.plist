@@ -60,5 +60,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need photo for event</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need photo for event</string>
 </dict>
 </plist>

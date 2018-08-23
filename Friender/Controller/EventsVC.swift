@@ -14,12 +14,17 @@ import GoogleSignIn
 class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate
  {
     
-    var images = [UIImage]()
-    var myImage: UIImage?
     let flowLayout = EventCollectionViewFlowLayout()
     let user = Auth.auth().currentUser
-    let ref = Database.database().reference(withPath: "events")
-    var events: [EventHandler] = []
+    
+    // MARK: - Variables
+    var ref: DatabaseReference!
+    
+    var events = [Event]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -31,35 +36,25 @@ class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerContr
         profileImage.contentMode = .scaleAspectFill
         profileImage.layer.cornerRadius = profileImage.bounds.size.width / 2
         profileImage.clipsToBounds = true
-        retrieveData()
+        ref = Database.database().reference()
+
         self.hideKeyboard()
 
     }
     
-    func retrieveData() {
-        // 1
-        ref.observe(.value, with: { snapshot in
-            // 2
-            var newEventTitle: [EventHandler] = []
-            
-            // 3
-            for child in snapshot.children {
-                // 4
-                if let snapshot = child as? DataSnapshot,
-                    let eventTitle = EventHandler(snapshot: snapshot) {
-                    newEventTitle.append(eventTitle)
-                }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ref.child("events").observe(.value) { snapshot in
+            var events = [Event]()
+            for unicornSnapshot in snapshot.children {
+                let event = Event(snapshot: unicornSnapshot as! DataSnapshot)
+                events.append(event)
             }
-            
-            // 5
-            self.events = newEventTitle
-            self.collectionView.reloadData()
-        })
-
+            self.events = events
+        }
     }
     
     func firebaseStorage() {
-        
         let user = Auth.auth().currentUser
       
         // Get a reference to the storage service using the default Firebase App
@@ -98,8 +93,6 @@ class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerContr
             self.profileImage.image = UIImage(data: data! as Data)
             
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -108,21 +101,11 @@ class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerContr
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCell
-        let eventTitle = events[indexPath.row]
-        
-        cell.eventTitle.text = eventTitle.title
+        cell.event = events[indexPath.row]
         return cell
     }
     
-    //MARK: - ImagePicker delegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            // imageViewPic.contentMode = .scaleToFill
-            myImage = pickedImage
-        }
-        picker.dismiss(animated: true, completion: nil)
-    }
-
+  
 
     @IBAction func addEventButtonWasPressed(_ sender: Any) {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PopupID") as! PopupViewVC
@@ -130,7 +113,6 @@ class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerContr
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
-
     
     }
 }

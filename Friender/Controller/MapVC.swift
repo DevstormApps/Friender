@@ -17,84 +17,59 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var locationManager = CLLocationManager()
-    let authorizationStatus = CLLocationManager.authorizationStatus()
-    var regionRadius: Double = 1000
-    var mapHasCenteredOnce = false
-    var userLocation = CLLocationCoordinate2D()
-    
-    
-    var geoFire: GeoFire!
-    var geofireRef: DatabaseReference!
+    var manager: CLLocationManager?
+    var regionRadius: CLLocationDistance = 1000
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        manager = CLLocationManager()
+        manager?.delegate = self
+        manager?.desiredAccuracy = kCLLocationAccuracyBest
+        checkAuthorizationStatus()
         mapView.delegate = self
-        mapView.userTrackingMode = MKUserTrackingMode.follow
-        geofireRef = Database.database().reference()
-        geoFire = GeoFire(firebaseRef: geofireRef)
+        centerMapOnUserLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        locationAuthStatus()
+
     }
     
-    func prepareLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locationManager.location?.coordinate {
-            userLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: regionRadius * 2, longitudeDelta: regionRadius * 2))
-            
-            mapView.setRegion(region, animated: true)
-            
-            mapView.removeAnnotations(mapView.annotations)
-            
-            let anno = MKPointAnnotation()
-            anno.coordinate = userLocation
-            anno.title = "thisLocation"
-            
-            mapView.addAnnotation(anno)
-        }
-        
-    }
-    
-    func locationAuthStatus() {
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            mapView.showsUserLocation = true
+    func checkAuthorizationStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedAlways  {
+            manager?.startUpdatingLocation()
         } else {
-            locationManager.requestWhenInUseAuthorization()
+            manager?.requestAlwaysAuthorization()
         }
     }
     
-    func centerMapOnLocation(_ location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2, regionRadius * 2)
+    func centerMapOnUserLocation() {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        
-     
-    }
-    
-    
     @IBAction func addEventBtnWasPressed(_ sender: Any) {
-        
+    
        
     }
     
     @IBAction func centerMapBtnWasPressed(_ sender: Any) {
-       
+       centerMapOnUserLocation()
 
-}
+    }
 
 
-
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkAuthorizationStatus()
+        if status == .authorizedAlways {
+            mapView.showsUserLocation = true
+            mapView.userTrackingMode = .follow
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        if  updateLocation.instance.shareLocation == true {
+        updateLocation.instance.updateUserLocation(userLocation.coordinate)
+        }
+    }
 
 }

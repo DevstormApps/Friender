@@ -141,8 +141,7 @@
 				0424AB9520F8C92B006DF2F5 /* EventCell.swift */,
 				04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */,
 			);
-			name = View;
-			path = "New Group/New Group";
+			path = View;
 			sourceTree = "<group>";
 		};
 		043FC8D020FFC57C0053EC28 /* Controller */ = {

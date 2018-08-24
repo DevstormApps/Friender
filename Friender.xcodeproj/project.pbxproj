@@ -21,7 +21,6 @@
 		04B39F8D212DC110002FA45C /* Anno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F8C212DC10F002FA45C /* Anno.swift */; };
 		04B39F8F212F0763002FA45C /* updateLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F8E212F0762002FA45C /* updateLocation.swift */; };
 		04B39F91212F07F3002FA45C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F90212F07F3002FA45C /* DatabaseService.swift */; };
-		04C966822122F12A00743E76 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966812122F12A00743E76 /* User.swift */; };
 		04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */; };
 		04C966892128587A00743E76 /* PopupViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966882128587A00743E76 /* PopupViewVC.swift */; };
 		04C9668B2129C12000743E76 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9668A2129C12000743E76 /* TabBarVC.swift */; };
@@ -58,7 +57,6 @@
 		04B39F8C212DC10F002FA45C /* Anno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anno.swift; sourceTree = "<group>"; };
 		04B39F8E212F0762002FA45C /* updateLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateLocation.swift; sourceTree = "<group>"; };
 		04B39F90212F07F3002FA45C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
-		04C966812122F12A00743E76 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		04C966882128587A00743E76 /* PopupViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewVC.swift; sourceTree = "<group>"; };
 		04C9668A2129C12000743E76 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 		043FC8CD20FFC51F0053EC28 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				04C966812122F12A00743E76 /* User.swift */,
 				043FC8D120FFC6150053EC28 /* Event.swift */,
 				04B39F8C212DC10F002FA45C /* Anno.swift */,
 				04B39F8E212F0762002FA45C /* updateLocation.swift */,
@@ -367,7 +364,6 @@
 				04B39F8F212F0763002FA45C /* updateLocation.swift in Sources */,
 				04C966892128587A00743E76 /* PopupViewVC.swift in Sources */,
 				0435CB7F21016A8700A22286 /* GFGeoHash.m in Sources */,
-				04C966822122F12A00743E76 /* User.swift in Sources */,
 				04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */,
 				0424AB9420F8C8D2006DF2F5 /* EventsVC.swift in Sources */,
 				0435CB7D21016A8700A22286 /* GeoFire.m in Sources */,

@@ -7,16 +7,24 @@
 //
 
 import Foundation
-
-import Foundation
 import MapKit
 
 class Anno: NSObject, MKAnnotation {
     var coordinate = CLLocationCoordinate2D()
-    var pokemonNumber: Int
+    var key: String
     
-    init(coordinate: CLLocationCoordinate2D, pokemonNumber: Int) {
+    init(coordinate: CLLocationCoordinate2D, key: String) {
         self.coordinate = coordinate
-        self.pokemonNumber = pokemonNumber
+        self.key = key
+        super.init()
+    }
+    
+    func update(_ annotation: Anno, _ coordinate: CLLocationCoordinate2D) {
+        var location = self.coordinate
+        location.latitude = coordinate.latitude
+        location.longitude = coordinate.longitude
+        UIView.animate(withDuration: 0.2) {
+            self.coordinate = location
+        }
     }
 }

@@ -12,4 +12,6 @@ target 'Friender' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Storage'
   pod 'GoogleSignIn'
+  pod 'FirebaseUI/Storage'
+  pod 'MaterialComponents'
 end

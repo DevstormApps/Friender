@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import GoogleSignIn
 
 @UIApplicationMain
@@ -16,12 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     var databaseRef: DatabaseReference!
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-
+        
         return true
     }
     
@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                         
                     self.databaseRef.child("user_profiles").child(user!.user.uid).child("name").setValue(user!.user.displayName)
                     self.databaseRef.child("user_profiles").child(user!.user.uid).child("email").setValue(user!.user.email)
+                    self.databaseRef.child("user_profiles").child(user!.user.uid).child("profile_picture").setValue(user!.user.photoURL?.absoluteString)
                         
                     } else {
                         guard let uid = user?.user.uid else { return }

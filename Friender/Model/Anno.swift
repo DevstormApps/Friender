@@ -8,14 +8,17 @@
 
 import Foundation
 import MapKit
+import GoogleSignIn
 
 class Anno: NSObject, MKAnnotation {
     var coordinate = CLLocationCoordinate2D()
     var key: String
+    var image: UIImage
     
-    init(coordinate: CLLocationCoordinate2D, key: String) {
+    init(coordinate: CLLocationCoordinate2D, key: String, image: UIImage) {
         self.coordinate = coordinate
         self.key = key
+        self.image = image
         super.init()
     }
     

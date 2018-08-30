@@ -40,7 +40,6 @@ class SignUpVC: UIViewController, GIDSignInUIDelegate {
     @IBAction func googleSignInButtonTapped(_ sender: Any) {
         
         
-    
         }
 }
 

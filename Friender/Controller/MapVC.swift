@@ -21,7 +21,9 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var manager: CLLocationManager?
     var regionRadius: CLLocationDistance = 1000
     let user = Auth.auth().currentUser
-    
+    var storageRef: StorageReference!
+    var storageDownloadTask: StorageDownloadTask!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         manager = CLLocationManager()
@@ -29,11 +31,18 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         manager?.desiredAccuracy = kCLLocationAccuracyBest
         checkAuthorizationStatus()
         mapView.delegate = self
+        storageRef = Storage.storage().reference()
         loadAnnotation()
         centerMapOnUserLocation()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
+//        let ref = Database.database().reference()
+//        ref.child("user_profiles").observeSingleEvent(of: .value, with: { snapshot in
+//            print(snapshot.childrenCount) // I got the expected number of items
+//            for rest in snapshot.children.allObjects as! [DataSnapshot] {
+//                let dict = rest.value as? [String : AnyObject] ?? [:]
+//                print(dict["profile_picture"]!)
+//            }
+//        })
 
     }
     
@@ -46,32 +55,83 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func loadAnnotation() {
-        DatabaseService.instance.events.observeSingleEvent(of: .value) { (snapshot) in
-            if let eventSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                for event in eventSnapshot {
-                    if event.hasChild("coordinate") {
-                        if let eventDict = event.value as? Dictionary<String, AnyObject> {
-                            let coordinateArray = eventDict["coordinate"] as! NSArray
-                            let eventCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
-                            let anno = Anno(coordinate: eventCoordinate, key: event.key)
-                            self.mapView.addAnnotation(anno)
+        DatabaseService.instance.accepted.child((user?.uid)!).observeSingleEvent(of: .value) { (snapshot) in
+            if let acceptedSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for user in acceptedSnapshot {
+                    if user.key != Auth.auth().currentUser?.uid {
+                        if user.hasChild("coordinate") {
+                            if let eventDict = user.value as? Dictionary<String, AnyObject> {
+                                let coordinateArray = eventDict["coordinate"] as! NSArray
+                                let eventCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
+                                
+                                let path = self.storageRef.child("/User Profile Pictures/"+(user.key)+"/profile_pic.jpg")
+                                
+                                self.storageDownloadTask = path.getData(maxSize: 1024 * 1024 * 12, completion: { (data, error) in
+                                    if let data = data {
+                                        let image = UIImage(data: data)
+                                        let anno = Anno(coordinate: eventCoordinate, key: user.key, image: image!)
+                                        self.mapView.addAnnotation(anno)
+                                        
+                                    }
+                                })
+                                
+                                
+                            }
                         }
+                    }
+                   
+                }
+            }
+        }
+        
+        DatabaseService.instance.accepter.child((user?.uid)!).observeSingleEvent(of: .value) { (snapshot) in
+            if let accepterSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for user in accepterSnapshot {
+                    if user.key != Auth.auth().currentUser?.uid {
+                        if user.hasChild("coordinate") {
+                            if let eventDict = user.value as? Dictionary<String, AnyObject> {
+                                let coordinateArray = eventDict["coordinate"] as! NSArray
+                                let eventCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
+                                
+                                let path = self.storageRef.child("/User Profile Pictures/"+(user.key)+"/profile_pic.jpg")
+                                self.storageDownloadTask = path.getData(maxSize: 1024 * 1024 * 12, completion: { (data, error) in
+                                    if let data = data {
+                                        let image = UIImage(data: data)
+                                        let anno = Anno(coordinate: eventCoordinate, key: user.key, image: image!)
+                                        self.mapView.addAnnotation(anno)
+                                        
+                                    }
+                                })
+                            }
+                        }
+
                     }
                 }
             }
         }
     }
+//
+//        DatabaseService.instance.events.observeSingleEvent(of: .value) { (snapshot) in
+//            if let eventSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+//                for event in eventSnapshot {
+//                    if event.hasChild("coordinate") {
+//                        if let eventDict = event.value as? Dictionary<String, AnyObject> {
+//                            let coordinateArray = eventDict["coordinate"] as! NSArray
+//                            let eventCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
+//                            let anno = Anno(coordinate: eventCoordinate, key: event.key)
+//                            self.mapView.addAnnotation(anno)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
     
     func centerMapOnUserLocation() {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    
-    @IBAction func addEventBtnWasPressed(_ sender: Any) {
-    
-       
-    }
     
     @IBAction func centerMapBtnWasPressed(_ sender: Any) {
        centerMapOnUserLocation()
@@ -88,64 +148,34 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        if  updateLocation.instance.shareLocation == true {
+    
         updateLocation.instance.updateUserLocation(userLocation.coordinate)
-        }
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotation = annotation as? Anno
+        if let annotation = annotation as? Anno {
             let identifier = "userAnnotation"
             let view: MKAnnotationView
-            
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            // Get a reference to the storage service using the default Firebase App
-            let storage = Storage.storage()
+            let image = annotation.image
+            let croppedImage = image.cropsToSquare()
+            let size = CGSize(width: 30, height: 30)
+            UIGraphicsBeginImageContext(size)
+            croppedImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            let pinImage = UIGraphicsGetImageFromCurrentImageContext()
+            view.contentMode = .scaleAspectFill
+            view.layer.cornerRadius = (pinImage?.size.width)! / 2
+            view.clipsToBounds = true
+            view.image = pinImage
             
-            // Create a storage reference
-            let storageRef = storage.reference()
             
-            //points to the child directory where the profile picture will be saved on firebase
-            let profileImageRef = storageRef.child("/User Profile Pictures/"+(user?.uid)!+"/profile_pic.jpg")
-            
-            if (GIDSignIn.sharedInstance().currentUser != nil) {
-                
-                let imageUrl = GIDSignIn.sharedInstance().currentUser.profile.imageURL(withDimension: 400).absoluteString
-                let url  = NSURL(string: imageUrl)! as URL
-                let data = NSData(contentsOf: url)
-                
-                //upload image to storage
-                _ = profileImageRef.putData(data! as Data, metadata: nil) { (metadata, error) in
-                    guard let metadata = metadata else {
-                        // Uh-oh, an error occurred!
-                        return
-                    }
-                    // Metadata contains file metadata such as size, content-type, and download URL.
-                    let size = metadata.size
-                    // You can also access to download URL after upload.
-                    storageRef.downloadURL { (url, error) in
-                        guard let downloadURL = url else {
-                            // Uh-oh, an error occurred!
-                            return
-                        }
-                    }
-                    
-                }
-                let pinPic = UIImage(data: data! as Data)
-                let cropsToSquare = pinPic?.cropsToSquare()
-                let size = CGSize(width: 30, height: 30)
-                UIGraphicsBeginImageContext(size)
-                cropsToSquare!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-                let resizedPinPic = UIGraphicsGetImageFromCurrentImageContext()
-                view.contentMode = .scaleAspectFill
-                view.layer.cornerRadius = (resizedPinPic?.size.width)! / 2
-                view.clipsToBounds = true
-                view.image = resizedPinPic
-                
-            }
             return view
-        
+
         }
+        return nil
+    }
+    
     
 }
 

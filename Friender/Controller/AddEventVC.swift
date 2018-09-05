@@ -17,9 +17,10 @@ class addEventVC: UIViewController {
     let tapRec = UITapGestureRecognizer()
     
     @IBOutlet weak var eventImage: UIImageView!
-    
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var eventTitleTextField: MDCTextField!
+    @IBOutlet weak var addImageButton: UIBarButtonItem!
+    
     // MARK: - Variables
     fileprivate let picker = UIImagePickerController()
     fileprivate var storageImagePath = ""
@@ -32,22 +33,17 @@ class addEventVC: UIViewController {
         ref = Database.database().reference()
         storageRef = Storage.storage().reference()
         picker.delegate = self
-        tapRec.addTarget(self, action: Selector(("tappedView")))
-        eventImage.addGestureRecognizer(tapRec)
-        self.hideKeyboard()
-
-        
-    }
-    
-    func tappedView(){
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            
-            picker.sourceType = .photoLibrary
+        addEventButton.layer.borderWidth = 0.5
+        addEventButton.layer.borderColor = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0).cgColor
+        addEventButton.layer.cornerRadius = 6
+        eventTitleTextField.placeholder = "Tell people about your event"
+        eventTitleTextField.cursorColor = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0)
+        if eventImage == nil || eventTitleTextField == nil {
+            addEventButton.isEnabled = false
         }
+        self.hideKeyboard()
         
-        present(picker, animated: true, completion: nil)
     }
-    
     
     // Setup for activity indicator to be shown when uploading image
     fileprivate var showNetworkActivityIndicator = false {
@@ -71,7 +67,44 @@ class addEventVC: UIViewController {
         
     }
     
+    func camera()
+    {
+        let myPickerController = UIImagePickerController()
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerControllerSourceType.camera
+        
+        self.present(myPickerController, animated: true, completion: nil)
+        
+    }
     
+    func photoLibrary()
+    {
+        
+        let myPickerController = UIImagePickerController()
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        self.present(myPickerController, animated: true, completion: nil)
+        
+    }
+    
+    func showActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.default, handler: { (alert:UIAlertAction!) -> Void in
+            self.camera()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Gallery", style: UIAlertActionStyle.default, handler: { (alert:UIAlertAction!) -> Void in
+            self.photoLibrary()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+        
+    }
+
     
     
     /*
@@ -86,12 +119,20 @@ class addEventVC: UIViewController {
     
     @IBAction func addEventButtonWasPressed(_ sender: Any) {
         // Get properties for the unicorn-to-be-created
+        addEventButton.isEnabled = false
         let title = self.eventTitleTextField.text ?? ""
         let event = Event(imagePath: storageImagePath, title: title, key: user!.uid)
         // Create the unicorn and record it
         writeEventToDatabase(event)
+        ref.child("events").child(user!.uid).child("timestamp").setValue(ServerValue.timestamp())
+        ref.child("events").child(user!.uid).child("duration").setValue(Int(30000))
+        addEventButton.isEnabled = true
+
     }
     
+    @IBAction func addImageButtonWasPressed(_ sender: Any) {
+        showActionSheet()
+    }
     
 
 }
@@ -108,7 +149,9 @@ extension addEventVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         }
         
         // 2. Create a unique image path for image. In the case I am using the googleAppId of my account appended to the interval between 00:00:00 UTC on 1 January 2001 and the current date and time as an Integer and then I append .jpg. You can use whatever you prefer as long as it ends up unique.
-        let imagePath = Auth.auth().app!.options.googleAppID + "/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+        let ref = Storage.storage().reference()
+        let uid = user?.uid
+        let imagePath = ref.child("/events/"+(user?.uid)!+"/event_pic.jpg")
         
         // 3. Set up metadata with appropriate content type
         let metadata = StorageMetadata()
@@ -116,25 +159,30 @@ extension addEventVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         
         // 4. Show activity indicator
         showNetworkActivityIndicator = true
-        
+
         // 5. Start upload task
-        storageUploadTask = storageRef.child(imagePath).putData(imageData, metadata: metadata) { (_, error) in
+        storageUploadTask = imagePath.putData(imageData, metadata: metadata, completion: { (metadata, error) in
             // 6. Hide activity indicator because uploading is done with or without an error
             self.showNetworkActivityIndicator = false
             
-            guard error == nil else {
+                        guard error == nil else {
                 print("Error uploading: \(error!)")
                 return
             }
-            self.uploadSuccess(imagePath, image)
-        }
-    }
+            self.storageUploadTask.observe(.progress, handler: { (snapshot) in
+                print(snapshot.progress as Any)
+            })
+
+            self.uploadSuccess(uid!, image)
+        })
+    
+}
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-}
 
+}
 extension UIViewController
 {
     func hideKeyboard()

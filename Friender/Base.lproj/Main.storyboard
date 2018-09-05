@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wLV-Fn-st5">
-                                <rect key="frame" x="0.0" y="116" width="320" height="403"/>
+                                <rect key="frame" x="0.0" y="113" width="320" height="406"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gmf-SV-ozp">
                                     <size key="itemSize" width="283" height="409"/>
@@ -79,7 +79,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="2fm-0f-nHA">
                         <barButtonItem key="rightBarButtonItem" springLoaded="YES" systemItem="add" id="hKc-E0-mXu">
-                            <color key="tintColor" red="1" green="0.61960784313725492" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.64679129464285712" green="0.42193080357142859" blue="0.9494977678571429" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="XoT-PQ-4nO" kind="show" id="AJ1-pR-5Ef"/>
                             </connections>
@@ -93,7 +93,7 @@
             </objects>
             <point key="canvasLocation" x="2666.25" y="133.09859154929578"/>
         </scene>
-        <!--Add EventVC-->
+        <!--Event-->
         <scene sceneID="pS1-dI-LcC">
             <objects>
                 <viewController id="XoT-PQ-4nO" customClass="addEventVC" customModule="Friender" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,21 +102,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="wEU-VZ-9yr">
-                                <rect key="frame" x="10" y="126" width="300" height="383"/>
+                                <rect key="frame" x="10" y="123" width="300" height="386"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBr-MM-zQn" customClass="MDCTextField">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="47"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image2" translatesAutoresizingMaskIntoConstraints="NO" id="6dp-1S-6Jw">
-                                        <rect key="frame" x="0.0" y="56" width="300" height="288"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6dp-1S-6Jw">
+                                        <rect key="frame" x="0.0" y="59" width="300" height="288"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="288" id="SiN-yn-Ssi"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bks-KR-8Us">
-                                        <rect key="frame" x="0.0" y="353" width="300" height="30"/>
-                                        <state key="normal" title="Add Event"/>
+                                        <rect key="frame" x="0.0" y="356" width="300" height="30"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="0.6470588235294118" green="0.42352941176470588" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="addEventButtonWasPressed:" destination="XoT-PQ-4nO" eventType="touchUpInside" id="TCf-WT-pgB"/>
                                         </connections>
@@ -125,7 +127,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="1" green="0.61960784310000006" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.64679129459999996" green="0.42193080360000002" blue="0.94949776789999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wEU-VZ-9yr" firstAttribute="top" secondItem="oPg-rW-vS3" secondAttribute="top" constant="10" id="C6W-i4-T3R"/>
                             <constraint firstItem="oPg-rW-vS3" firstAttribute="bottom" secondItem="wEU-VZ-9yr" secondAttribute="bottom" constant="10" id="PRa-Ld-p5K"/>
@@ -134,15 +136,23 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oPg-rW-vS3"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Event" id="525-v7-LVe">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="8Nf-TT-jhV">
+                            <connections>
+                                <action selector="addImageButtonWasPressed:" destination="XoT-PQ-4nO" id="dm1-R6-9X2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addEventButton" destination="bks-KR-8Us" id="n1l-G4-qGF"/>
+                        <outlet property="addImageButton" destination="8Nf-TT-jhV" id="BEU-Lc-N1H"/>
                         <outlet property="eventImage" destination="6dp-1S-6Jw" id="TC8-FL-L4c"/>
                         <outlet property="eventTitleTextField" destination="DBr-MM-zQn" id="rm2-qU-gnw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rls-S8-Im4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3346.875" y="132.04225352112675"/>
+            <point key="canvasLocation" x="3548" y="133"/>
         </scene>
         <!--Requests-->
         <scene sceneID="Bzg-xb-Haz">
@@ -230,7 +240,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5jD-nr-pNk">
-                                <rect key="frame" x="0.0" y="116" width="320" height="403"/>
+                                <rect key="frame" x="0.0" y="113" width="320" height="406"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJN-Op-K7Z">
                                 <rect key="frame" x="240" y="439" width="60" height="60"/>
@@ -308,7 +318,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.64679129459999996" green="0.42193080360000002" blue="0.94949776789999996" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="dAn-nw-2r0" kind="relationship" relationship="viewControllers" id="DgK-Z7-TlL"/>
@@ -327,7 +337,7 @@
                     <tabBarItem key="tabBarItem" title="Requests" id="zrj-XG-RcE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Nbh-Ro-eCb">
-                        <rect key="frame" x="0.0" y="20" width="320" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="93"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -346,9 +356,9 @@
                     <tabBarItem key="tabBarItem" title="Events" id="xFg-yN-iRt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="5Yp-tP-rTp">
-                        <rect key="frame" x="0.0" y="20" width="320" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="93"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="1" green="0.61960784310000006" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.64679129459999996" green="0.42193080360000002" blue="0.94949776789999996" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -366,7 +376,7 @@
                     <tabBarItem key="tabBarItem" title="Map" image="icloc2" selectedImage="Shape" id="sAj-rN-Bxb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="aCc-I1-pC3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="93"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -380,7 +390,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image2" width="1024" height="1024"/>
         <image name="SendButton" width="73" height="73"/>
         <image name="Shape" width="14" height="20"/>
         <image name="icloc2" width="14" height="20"/>

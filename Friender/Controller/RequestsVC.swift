@@ -66,9 +66,7 @@ class RequestsVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RequestCell
-         cell.userImage.contentMode = .scaleAspectFill
-         cell.userImage.layer.cornerRadius = cell.userImage.bounds.size.width / 2
-         cell.request = requests[indexPath.row]
+        cell.request = requests[indexPath.row]
         return cell
     }
   

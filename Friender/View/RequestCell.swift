@@ -33,13 +33,14 @@ class RequestCell: UITableViewCell {
     
     func downloadImage(from storageImagePath: String) {
         let path = storageRef.child("/User Profile Pictures/"+(storageImagePath)+"/profile_pic.jpg")
-        
-        storageDownloadTask = path.getData(maxSize: 1024 * 1024 * 12, completion: { (data, error) in
-            if let data = data {
-                self.userImage.image = UIImage(data: data)
-            }
-        })
-        
+        userImage.sd_setImage(with: path)
+
+//        storageDownloadTask = path.getData(maxSize: 1024 * 1024 * 12, completion: { (data, error) in
+//            if let data = data {
+//                self.userImage.image = UIImage(data: data)
+//            }
+//        })
+//
         // 7. Finish download of image
     }
 
@@ -47,11 +48,13 @@ class RequestCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         storageRef = Storage.storage().reference()
+        userImage.contentMode = .scaleAspectFill
+        userImage.layer.cornerRadius = userImage.bounds.size.width / 2
+        userImage.clipsToBounds = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        storageDownloadTask.cancel()
         userImage.image = nil
         username.text = "username"
     }

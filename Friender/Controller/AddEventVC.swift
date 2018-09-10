@@ -12,7 +12,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 
-class addEventVC: UIViewController {
+class addEventVC: UIViewController, UITextFieldDelegate {
     
     let tapRec = UITapGestureRecognizer()
     
@@ -20,6 +20,7 @@ class addEventVC: UIViewController {
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var eventTitleTextField: MDCTextField!
     @IBOutlet weak var addImageButton: UIBarButtonItem!
+    @IBOutlet weak var progressView: UIProgressView!
     
     // MARK: - Variables
     fileprivate let picker = UIImagePickerController()
@@ -27,22 +28,24 @@ class addEventVC: UIViewController {
     fileprivate var ref: DatabaseReference!
     fileprivate var storageRef: StorageReference!
     fileprivate var storageUploadTask: StorageUploadTask!
+    let color = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
         storageRef = Storage.storage().reference()
         picker.delegate = self
-        addEventButton.layer.borderWidth = 0.5
-        addEventButton.layer.borderColor = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0).cgColor
-        addEventButton.layer.cornerRadius = 6
         eventTitleTextField.placeholder = "Tell people about your event"
         eventTitleTextField.cursorColor = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0)
-        if eventImage == nil || eventTitleTextField == nil {
-            addEventButton.isEnabled = false
-        }
-        self.hideKeyboard()
-        
+        eventTitleTextField.delegate = self
+        progressView.progress = 0
+        addEventButton.isUserInteractionEnabled = false
+        addEventButton.isEnabled = false
+        addEventButton.alpha = 0.5
+
+        self.setupHideKeyboardOnTap()
+
+
     }
     
     // Setup for activity indicator to be shown when uploading image
@@ -66,6 +69,7 @@ class addEventVC: UIViewController {
         storageImagePath = storagePath
         
     }
+
     
     func camera()
     {
@@ -104,29 +108,30 @@ class addEventVC: UIViewController {
         self.present(actionSheet, animated: true, completion: nil)
         
     }
+    
+    
+     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if eventTitleTextField.text != nil && eventImage.image != nil {
+            addEventButton.isUserInteractionEnabled = true
+            addEventButton.isEnabled = true
+            addEventButton.alpha = 1
 
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+        } else {
+            addEventButton.isUserInteractionEnabled = false
+            addEventButton.isEnabled = false
+            addEventButton.alpha = 0.5
+
+        }
+        }
     
     @IBAction func addEventButtonWasPressed(_ sender: Any) {
         // Get properties for the unicorn-to-be-created
-        addEventButton.isEnabled = false
         let title = self.eventTitleTextField.text ?? ""
         let event = Event(imagePath: storageImagePath, title: title, key: user!.uid)
         // Create the unicorn and record it
         writeEventToDatabase(event)
         ref.child("events").child(user!.uid).child("timestamp").setValue(ServerValue.timestamp())
-        ref.child("events").child(user!.uid).child("duration").setValue(Int(30000))
-        addEventButton.isEnabled = true
+        ref.child("events").child(user!.uid).child("duration").setValue(Int(300000))
 
     }
     
@@ -144,8 +149,19 @@ extension addEventVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         // 1. Get image data from selected image
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage,
             let imageData = UIImageJPEGRepresentation(image, 0.5) else {
+                
                 print("Could not get Image JPEG Representation")
+                addEventButton.isUserInteractionEnabled = false
+                addEventButton.isEnabled = false
+                addEventButton.alpha = 0.5
+                
                 return
+        }
+        
+        if eventTitleTextField.text != "" {
+            addEventButton.isUserInteractionEnabled = true
+            addEventButton.isEnabled = true
+            addEventButton.alpha = 1
         }
         
         // 2. Create a unique image path for image. In the case I am using the googleAppId of my account appended to the interval between 00:00:00 UTC on 1 January 2001 and the current date and time as an Integer and then I append .jpg. You can use whatever you prefer as long as it ends up unique.
@@ -159,7 +175,7 @@ extension addEventVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         
         // 4. Show activity indicator
         showNetworkActivityIndicator = true
-
+        
         // 5. Start upload task
         storageUploadTask = imagePath.putData(imageData, metadata: metadata, completion: { (metadata, error) in
             // 6. Hide activity indicator because uploading is done with or without an error
@@ -170,7 +186,12 @@ extension addEventVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                 return
             }
             self.storageUploadTask.observe(.progress, handler: { (snapshot) in
-                print(snapshot.progress as Any)
+                if let completedUnitCount = snapshot.progress?.completedUnitCount, let totalUnitCount =
+                    
+                    snapshot.progress?.totalUnitCount {
+                    
+                    let uploadProgress:Float = Float(completedUnitCount) / Float(totalUnitCount)
+                    self.progressView.progress = uploadProgress   }
             })
 
             self.uploadSuccess(uid!, image)
@@ -183,20 +204,18 @@ extension addEventVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     }
 
 }
-extension UIViewController
-{
-    func hideKeyboard()
-    {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(UIViewController.dismissKeyboard))
-        
-        view.addGestureRecognizer(tap)
+
+extension UIViewController {
+    /// Call this once to dismiss open keyboards by tapping anywhere in the view controller
+    func setupHideKeyboardOnTap() {
+        self.view.addGestureRecognizer(self.endEditingRecognizer())
+        self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
     }
     
-    @objc func dismissKeyboard()
-    {
-        view.endEditing(true)
+    /// Dismisses the keyboard from self.view
+    private func endEditingRecognizer() -> UIGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        return tap
     }
 }
-

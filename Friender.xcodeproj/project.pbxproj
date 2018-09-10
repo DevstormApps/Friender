@@ -32,6 +32,7 @@
 		04F0BAFE20507D4400221642 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BAFC20507D4400221642 /* Main.storyboard */; };
 		04F0BB0020507D4500221642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BAFF20507D4500221642 /* Assets.xcassets */; };
 		04F0BB0320507D4500221642 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F0BB0120507D4500221642 /* LaunchScreen.storyboard */; };
+		04FD73B52141F71600F89636 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD73B42141F71600F89636 /* User.swift */; };
 		9FCA169D97D989C49408A614 /* Pods_Friender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D532D71D49F5DF346C7EA41 /* Pods_Friender.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		04F0BAFF20507D4500221642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04F0BB0220507D4500221642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04F0BB0420507D4500221642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04FD73B42141F71600F89636 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0EFB49C525C3F061362C48CB /* Pods-Friender.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friender.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Friender/Pods-Friender.debug.xcconfig"; sourceTree = "<group>"; };
 		4D532D71D49F5DF346C7EA41 /* Pods_Friender.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Friender.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C90FA55F18F2967C129C1B /* Pods-Friender.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friender.release.xcconfig"; path = "Pods/Target Support Files/Pods-Friender/Pods-Friender.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				04B39F8E212F0762002FA45C /* updateLocation.swift */,
 				04B39F90212F07F3002FA45C /* DatabaseService.swift */,
 				047B2D202136F7A100829557 /* Requests.swift */,
+				04FD73B42141F71600F89636 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				047A25532136409A00F38E09 /* AddEventVC.swift in Sources */,
 				043FC8D220FFC6150053EC28 /* Event.swift in Sources */,
 				04CF3CDB213615530060C83E /* RequestsVC.swift in Sources */,
+				04FD73B52141F71600F89636 /* User.swift in Sources */,
 				0435CB7E21016A8700A22286 /* GFBase32Utils.m in Sources */,
 				04B39F8F212F0763002FA45C /* updateLocation.swift in Sources */,
 				047B2D212136F7A100829557 /* Requests.swift in Sources */,

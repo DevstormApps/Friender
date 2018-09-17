@@ -111,7 +111,7 @@ class addEventVC: UIViewController, UITextFieldDelegate {
     
     
      func textFieldDidBeginEditing(_ textField: UITextField) {
-        if eventTitleTextField.text != nil && eventImage.image != nil {
+        if eventTitleTextField.text != "" && eventImage.image != nil {
             addEventButton.isUserInteractionEnabled = true
             addEventButton.isEnabled = true
             addEventButton.alpha = 1
@@ -131,7 +131,7 @@ class addEventVC: UIViewController, UITextFieldDelegate {
         // Create the unicorn and record it
         writeEventToDatabase(event)
         ref.child("events").child(user!.uid).child("timestamp").setValue(ServerValue.timestamp())
-        ref.child("events").child(user!.uid).child("duration").setValue(Int(300000))
+        ref.child("events").child(user!.uid).child("duration").setValue(Int(3000000))
 
     }
     

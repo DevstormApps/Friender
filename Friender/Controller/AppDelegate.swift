@@ -21,11 +21,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-       
+        
+        setRootViewController()
         
         return true
     }
     
+    func setRootViewController() {
+        Auth.auth().addStateDidChangeListener { auth, user in
+            
+            if Auth.auth().currentUser != nil {
+                // Set Your home view controller Here as root View Controller
+                let myStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let homePage = myStoryboard.instantiateViewController(withIdentifier: "TabBar") as! TabBarVC
+                
+                
+                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = homePage
+                
+            } else {
+                let myStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let signInPage = myStoryboard.instantiateViewController(withIdentifier: "SignIn") as! SignUpVC
+                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = signInPage
+                
+            }
+
+        }
+    }
+
     
     func application(_ application: UIApplication,
                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -70,6 +94,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     self.databaseRef.child("user_profiles").child(user!.user.uid).child("name").setValue(user!.user.displayName)
                     self.databaseRef.child("user_profiles").child(user!.user.uid).child("email").setValue(user!.user.email)
                     self.databaseRef.child("user_profiles").child(user!.user.uid).child("profile_picture").setValue(user!.user.photoURL?.absoluteString)
+                        
+                        let storage = Storage.storage()
+                        
+                        // Create a storage reference
+                        let storageRef = storage.reference()
+                        
+                        //points to the child directory where the profile picture will be saved on firebase
+                        let profilePicRef = storageRef.child("/User Profile Pictures/"+(Auth.auth().currentUser?.uid)!+"/profile_pic.jpg")
+                        
+
+                        
+                        if (GIDSignIn.sharedInstance().currentUser != nil) {
+                            
+                            let imageUrl = GIDSignIn.sharedInstance().currentUser.profile.imageURL(withDimension: 400).absoluteString
+                            let url  = NSURL(string: imageUrl)! as URL
+                            let data = NSData(contentsOf: url)
+                            
+                            //upload image to storage
+                            _ = profilePicRef.putData(data! as Data)
+                        }
+                        
                         
                     } else {
                         guard let uid = user?.user.uid else { return }

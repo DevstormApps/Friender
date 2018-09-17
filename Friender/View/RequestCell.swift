@@ -25,7 +25,7 @@ class RequestCell: UITableViewCell {
     var request: Requests? {
         didSet {
             if let request = request {
-                downloadImage(from: request.profile_picture)
+                downloadImage(from: request.key)
                 username.text = request.name
             }
         }

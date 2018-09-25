@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import GoogleSignIn
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -17,11 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     var databaseRef: DatabaseReference!
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        
+        GMSServices.provideAPIKey("AIzaSyDY9TgCvAwl7X9tpvCjsd9WGqYNJo6jl7Q")
+        GMSPlacesClient.provideAPIKey("AIzaSyDY9TgCvAwl7X9tpvCjsd9WGqYNJo6jl7Q")
         setRootViewController()
         
         return true
@@ -41,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 
             } else {
                 let myStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let signInPage = myStoryboard.instantiateViewController(withIdentifier: "SignIn") as! SignUpVC
+                let signInPage = myStoryboard.instantiateViewController(withIdentifier: "SignIn") as! SignInVC
                 let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.window?.rootViewController = signInPage
                 
@@ -59,10 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     @available(iOS 11.0, *)
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+                                                 sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: options[UIApplication.OpenURLOptionsKey.annotation])
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,

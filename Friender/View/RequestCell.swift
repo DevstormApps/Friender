@@ -67,14 +67,14 @@ class RequestCell: UITableViewCell {
     @IBAction func acceptButtonWasPressed(_ sender: Any) {
         let ref = Database.database().reference()
         
-        ref.child("requests").child(user!.uid).child((request?.key)!).child("accepted").setValue(true)
+        ref.child("requests").child(user!.uid).child((request?.key)!).child("isRequesterAccepted").setValue(true)
         
+        DatabaseService.instance.events.child((user?.uid)!).observeSingleEvent(of: .value) { (snapshot) in
+                let snapshotValue = snapshot.value as! Dictionary<String, AnyObject>
+                let coordinateArray = snapshotValue["coordinate"] as! NSArray
+                print(coordinateArray[0])
+            ref.child("acceptedEventRequesters").child((self.request?.key)!).child((user?.uid)!).child("coordinate").setValue(coordinateArray)
+                }
+        }
 
-        ref.child("accepter").child(user!.uid).child((request?.key)!).child("name").setValue(request?.name)
-        let name = GIDSignIn.sharedInstance().currentUser.profile.name
-
-        ref.child("accepted").child((request?.key)!).child(user!.uid).child("name").setValue(name)
-
-    }
-    
 }

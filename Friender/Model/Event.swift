@@ -13,12 +13,14 @@ import FirebaseDatabase
 struct Event {
     let imagePath: String
     let title: String
+    let addedBy: String
     let key: String
     
     // Standard init
-    init(imagePath: String, title: String, key: String) {
+    init(imagePath: String, title: String, addedBy: String, key: String) {
         self.imagePath = imagePath
         self.title = title
+        self.addedBy = addedBy
         self.key = key
     }
     
@@ -27,6 +29,7 @@ struct Event {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         imagePath = snapshotValue["imagePath"] as! String
         title = snapshotValue["title"] as! String
+        addedBy = snapshotValue["addedBy"] as! String
         key = snapshotValue["key"] as! String
     }
     
@@ -35,6 +38,7 @@ struct Event {
         return [
             "imagePath": imagePath,
             "title": title,
+            "addedBy": addedBy,
             "key": key
         ]
     }

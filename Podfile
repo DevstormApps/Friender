@@ -13,5 +13,7 @@ target 'Friender' do
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Storage'
   pod 'GoogleSignIn'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   pod 'MaterialComponents'
 end

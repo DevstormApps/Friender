@@ -17,8 +17,7 @@ class DatabaseService {
     private var _ref = ref
     private var _events = ref.child("events")
     private var _users = ref.child("user_profiles")
-    private var _accepted = ref.child("accepted")
-    private var _accepter = ref.child("accepter")
+    private var _acceptedEventRequesters = ref.child("acceptedEventRequesters")
 
     
 
@@ -31,15 +30,9 @@ class DatabaseService {
         return _users
     }
     
-    var accepted: DatabaseReference {
-        return _accepted
+    var acceptedEventRequesters: DatabaseReference {
+        return _acceptedEventRequesters
         
     }
-    
-    var accepter: DatabaseReference {
-        return _accepter
-        
-    }
-
     
 }

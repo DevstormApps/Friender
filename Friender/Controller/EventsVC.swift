@@ -41,15 +41,6 @@ class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerContr
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        ref.child("user_profiles").observe(.value) { snapshot in
-            var users = [User]()
-            for eventSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
-                let user = User(snapshot: eventSnapshot)
-                users.append(user)
-            }
-            self.users = users
-        }
 
         ref.child("events").observe(.value) { snapshot in
             var events = [Event]()
@@ -68,29 +59,8 @@ class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerContr
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as! EventCell
-//        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
         cell.event = events[indexPath.row]
-        cell.users = users[indexPath.row]
         return cell
     }
-    
-//    @objc func tap(_ sender: UITapGestureRecognizer) {
-//
-//        let location = sender.location(in: self.collectionView)
-//        let indexPath = self.collectionView.indexPathForItem(at: location)
-//
-//        if let index = indexPath {
-//            let ref = Database.database().reference()
-//            ref.child("requests").child(events[index.row].key).child(user!.uid).child("accepted").setValue(false)
-//
-//            let name = GIDSignIn.sharedInstance().currentUser.profile.name
-//            ref.child("requests").child(events[index.row].key).child(user!.uid).child("name").setValue(name)
-//
-//            ref.child("requests").child(events[index.row].key).child(user!.uid).child("key").setValue(String(user!.uid))
-//            ref.child("requests").child(events[index.row].key).child(user!.uid).child("profile_picture").setValue(String(user!.uid))
-//
-//
-//                }
-//
-//        }
+ 
    }

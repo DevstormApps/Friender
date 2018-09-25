@@ -24,6 +24,7 @@ class MeVC: UIViewController {
             self.username.text = usernameText
         }
         profileImage.layer.cornerRadius = profileImage.bounds.size.width / 2
+        profileImage.contentMode = .scaleAspectFill
         profileImage.clipsToBounds = true
         
         let ref = Storage.storage().reference()

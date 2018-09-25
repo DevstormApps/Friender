@@ -28,36 +28,23 @@ class EventCell: UICollectionViewCell {
             if let event = event {
                 downloadImage(from: event.imagePath)
                 eventTitle.text = event.title
+                username.text = event.addedBy
                 downloadProfileImage(from: event.key)
             }
         }
     }
     
-    var users: User? {
-        didSet {
-            if let users = users {
-                username.text = users.username
-            }
-        }
-    }
-    
     @IBAction func requestButtonWasPressed(_ sender: Any) {
-        
             let ref = Database.database().reference()
-        ref.child("requests").child((event?.key)!).child(user!.uid).child("accepted").setValue(false)
-            
+        ref.child("requests").child((event?.key)!).child(user!.uid).child("isRequesterAccepted").setValue(false)
             let name = GIDSignIn.sharedInstance().currentUser.profile.name
         ref.child("requests").child((event?.key)!).child(user!.uid).child("name").setValue(name)
-            
         ref.child("requests").child((event?.key)!).child(user!.uid).child("key").setValue(String(user!.uid))
         ref.child("requests").child((event?.key)!).child(user!.uid).child("profile_picture").setValue(String(user!.uid))
-            
-            
         }
 
     func downloadImage(from storageImagePath: String) {
         let path = storageRef.child("/events/"+(storageImagePath)+"/event_pic.jpg")
-        
         
         path.getData(maxSize: 1024 * 1024 * 12) { (data, error) in
             if let data = data {
@@ -85,6 +72,7 @@ class EventCell: UICollectionViewCell {
         super.awakeFromNib()
         storageRef = Storage.storage().reference()
         profileImage.layer.cornerRadius = profileImage.bounds.size.width / 2
+        profileImage.contentMode = .scaleAspectFill
         profileImage.clipsToBounds = true
         requestButton.layer.borderWidth = 0.5
         requestButton.layer.borderColor = color.cgColor

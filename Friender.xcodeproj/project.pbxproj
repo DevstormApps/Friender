@@ -16,16 +16,15 @@
 		0435CB8121016A8700A22286 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7C21016A8600A22286 /* GFQuery.m */; };
 		043FC8D220FFC6150053EC28 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FC8D120FFC6150053EC28 /* Event.swift */; };
 		0452D42E20517AE70093F72B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D42D20517AE70093F72B /* MapVC.swift */; };
-		045F203C2100FCB70007C703 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F203B2100FCB60007C703 /* SignUpVC.swift */; };
+		045F203C2100FCB70007C703 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F203B2100FCB60007C703 /* SignInVC.swift */; };
 		045F203E2100FDC80007C703 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045F203D2100FDC70007C703 /* GoogleService-Info.plist */; };
 		04758FE5214A150C006A1E18 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04758FE4214A150C006A1E18 /* MeVC.swift */; };
-		047A25532136409A00F38E09 /* AddEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A25522136409A00F38E09 /* AddEventVC.swift */; };
+		047A25532136409A00F38E09 /* EventComposerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A25522136409A00F38E09 /* EventComposerVC.swift */; };
 		047B2D212136F7A100829557 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B2D202136F7A100829557 /* Requests.swift */; };
 		04B39F8D212DC110002FA45C /* Anno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F8C212DC10F002FA45C /* Anno.swift */; };
-		04B39F8F212F0763002FA45C /* updateLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F8E212F0762002FA45C /* updateLocation.swift */; };
+		04B39F8F212F0763002FA45C /* pushLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F8E212F0762002FA45C /* pushLocation.swift */; };
 		04B39F91212F07F3002FA45C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F90212F07F3002FA45C /* DatabaseService.swift */; };
 		04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */; };
-		04C966892128587A00743E76 /* PopupViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966882128587A00743E76 /* PopupViewVC.swift */; };
 		04C9668B2129C12000743E76 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9668A2129C12000743E76 /* TabBarVC.swift */; };
 		04CF3CDB213615530060C83E /* RequestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF3CDA213615530060C83E /* RequestsVC.swift */; };
 		04CF3CDF2136160A0060C83E /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF3CDE2136160A0060C83E /* RequestCell.swift */; };
@@ -58,16 +57,15 @@
 		0435CB8221016CBD00A22286 /* Friender-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Friender-Bridging-Header.h"; sourceTree = "<group>"; };
 		043FC8D120FFC6150053EC28 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0452D42D20517AE70093F72B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
-		045F203B2100FCB60007C703 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		045F203B2100FCB60007C703 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		045F203D2100FDC70007C703 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04758FE4214A150C006A1E18 /* MeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
-		047A25522136409A00F38E09 /* AddEventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventVC.swift; sourceTree = "<group>"; };
+		047A25522136409A00F38E09 /* EventComposerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventComposerVC.swift; sourceTree = "<group>"; };
 		047B2D202136F7A100829557 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		04B39F8C212DC10F002FA45C /* Anno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anno.swift; sourceTree = "<group>"; };
-		04B39F8E212F0762002FA45C /* updateLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateLocation.swift; sourceTree = "<group>"; };
+		04B39F8E212F0762002FA45C /* pushLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pushLocation.swift; sourceTree = "<group>"; };
 		04B39F90212F07F3002FA45C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		04C966882128587A00743E76 /* PopupViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewVC.swift; sourceTree = "<group>"; };
 		04C9668A2129C12000743E76 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		04CF3CDA213615530060C83E /* RequestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsVC.swift; sourceTree = "<group>"; };
 		04CF3CDE2136160A0060C83E /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
@@ -138,7 +136,7 @@
 			children = (
 				043FC8D120FFC6150053EC28 /* Event.swift */,
 				04B39F8C212DC10F002FA45C /* Anno.swift */,
-				04B39F8E212F0762002FA45C /* updateLocation.swift */,
+				04B39F8E212F0762002FA45C /* pushLocation.swift */,
 				04B39F90212F07F3002FA45C /* DatabaseService.swift */,
 				047B2D202136F7A100829557 /* Requests.swift */,
 				04FD73B42141F71600F89636 /* User.swift */,
@@ -162,11 +160,10 @@
 				04F0BAF820507D4300221642 /* AppDelegate.swift */,
 				0452D42D20517AE70093F72B /* MapVC.swift */,
 				0424AB9320F8C8D2006DF2F5 /* EventsVC.swift */,
-				045F203B2100FCB60007C703 /* SignUpVC.swift */,
-				04C966882128587A00743E76 /* PopupViewVC.swift */,
+				045F203B2100FCB60007C703 /* SignInVC.swift */,
 				04C9668A2129C12000743E76 /* TabBarVC.swift */,
 				04CF3CDA213615530060C83E /* RequestsVC.swift */,
-				047A25522136409A00F38E09 /* AddEventVC.swift */,
+				047A25522136409A00F38E09 /* EventComposerVC.swift */,
 				04758FE4214A150C006A1E18 /* MeVC.swift */,
 			);
 			path = Controller;
@@ -259,6 +256,7 @@
 				TargetAttributes = {
 					04F0BAF420507D4100221642 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -366,10 +364,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Friender/Pods-Friender-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,20 +387,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B39F91212F07F3002FA45C /* DatabaseService.swift in Sources */,
-				045F203C2100FCB70007C703 /* SignUpVC.swift in Sources */,
+				045F203C2100FCB70007C703 /* SignInVC.swift in Sources */,
 				04B39F8D212DC110002FA45C /* Anno.swift in Sources */,
 				0452D42E20517AE70093F72B /* MapVC.swift in Sources */,
 				0424AB9620F8C92B006DF2F5 /* EventCell.swift in Sources */,
 				04F0BAF920507D4300221642 /* AppDelegate.swift in Sources */,
 				0435CB8021016A8700A22286 /* GFGeoHashQuery.m in Sources */,
-				047A25532136409A00F38E09 /* AddEventVC.swift in Sources */,
+				047A25532136409A00F38E09 /* EventComposerVC.swift in Sources */,
 				043FC8D220FFC6150053EC28 /* Event.swift in Sources */,
 				04CF3CDB213615530060C83E /* RequestsVC.swift in Sources */,
 				04FD73B52141F71600F89636 /* User.swift in Sources */,
 				0435CB7E21016A8700A22286 /* GFBase32Utils.m in Sources */,
-				04B39F8F212F0763002FA45C /* updateLocation.swift in Sources */,
+				04B39F8F212F0763002FA45C /* pushLocation.swift in Sources */,
 				047B2D212136F7A100829557 /* Requests.swift in Sources */,
-				04C966892128587A00743E76 /* PopupViewVC.swift in Sources */,
 				04758FE5214A150C006A1E18 /* MeVC.swift in Sources */,
 				0435CB7F21016A8700A22286 /* GFGeoHash.m in Sources */,
 				04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */,
@@ -552,10 +553,10 @@
 				DEVELOPMENT_TEAM = 7JP8N4YCJM;
 				INFOPLIST_FILE = Friender/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Mosab.Friender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeist.Friender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Friender/Friender-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -569,10 +570,10 @@
 				DEVELOPMENT_TEAM = 7JP8N4YCJM;
 				INFOPLIST_FILE = Friender/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Mosab.Friender;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zeist.Friender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Friender/Friender-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

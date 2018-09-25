@@ -12,7 +12,6 @@ import FirebaseDatabase
 
 struct User {
     let username: String
-    
     // Standard init
     init(username: String) {
         self.username = username

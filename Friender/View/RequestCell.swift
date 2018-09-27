@@ -70,10 +70,12 @@ class RequestCell: UITableViewCell {
         ref.child("requests").child(user!.uid).child((request?.key)!).child("isRequesterAccepted").setValue(true)
         
         DatabaseService.instance.events.child((user?.uid)!).observeSingleEvent(of: .value) { (snapshot) in
-                let snapshotValue = snapshot.value as! Dictionary<String, AnyObject>
-                let coordinateArray = snapshotValue["coordinate"] as! NSArray
-                print(coordinateArray[0])
-            ref.child("acceptedEventRequesters").child((self.request?.key)!).child((user?.uid)!).child("coordinate").setValue(coordinateArray)
+            
+            let snapshotValue = snapshot.value as! Dictionary<String, AnyObject>
+
+            let coordinateArray = snapshotValue["coordinate"] as! NSArray
+        ref.child("acceptedEventRequesters").child((self.request?.key)!).child((user?.uid)!).child("coordinate").setValue(coordinateArray)
+            ref.child("acceptedEventRequesters").child((self.request?.key)!).child((user?.uid)!).child("imagePath").setValue((self.request?.key)!)
                 }
         }
 

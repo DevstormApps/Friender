@@ -12,8 +12,7 @@ import Firebase
 import FirebaseUI
 import GoogleSignIn
 
-class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate
- {
+class EventsVC: UIViewController, UICollectionViewDataSource {
     
     let flowLayout = EventCollectionViewFlowLayout()
     let user = Auth.auth().currentUser
@@ -27,7 +26,6 @@ class EventsVC: UIViewController, UICollectionViewDataSource, UIImagePickerContr
         }
     }
     
-    var users = [User]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     

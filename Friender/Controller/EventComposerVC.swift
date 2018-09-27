@@ -146,8 +146,33 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
         showActionSheet()
     }
     
+    
+    @IBAction func datePickerWasPressed(_ sender: Any) {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        
+        let alert = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
+        alert.view.addSubview(datePicker)
 
+        
+        let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.string(from: datePicker.date)
+            print(dateString)
+        }
+        
+        let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
+    
+
 // MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension EventComposerVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

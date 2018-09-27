@@ -16,6 +16,9 @@
 		0435CB8121016A8700A22286 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0435CB7C21016A8600A22286 /* GFQuery.m */; };
 		043FC8D220FFC6150053EC28 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FC8D120FFC6150053EC28 /* Event.swift */; };
 		0452D42E20517AE70093F72B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452D42D20517AE70093F72B /* MapVC.swift */; };
+		045D7C5B215A883700B4B9AF /* AcceptedEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D7C5A215A883700B4B9AF /* AcceptedEvents.swift */; };
+		045D7C5F215AA18100B4B9AF /* AcceptedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D7C5E215AA18100B4B9AF /* AcceptedCell.swift */; };
+		045D7C61215C187100B4B9AF /* AcceptedRequesterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D7C60215C187000B4B9AF /* AcceptedRequesterVC.swift */; };
 		045F203C2100FCB70007C703 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F203B2100FCB60007C703 /* SignInVC.swift */; };
 		045F203E2100FDC80007C703 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045F203D2100FDC70007C703 /* GoogleService-Info.plist */; };
 		04758FE5214A150C006A1E18 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04758FE4214A150C006A1E18 /* MeVC.swift */; };
@@ -57,6 +60,9 @@
 		0435CB8221016CBD00A22286 /* Friender-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Friender-Bridging-Header.h"; sourceTree = "<group>"; };
 		043FC8D120FFC6150053EC28 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0452D42D20517AE70093F72B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		045D7C5A215A883700B4B9AF /* AcceptedEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedEvents.swift; sourceTree = "<group>"; };
+		045D7C5E215AA18100B4B9AF /* AcceptedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedCell.swift; sourceTree = "<group>"; };
+		045D7C60215C187000B4B9AF /* AcceptedRequesterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedRequesterVC.swift; sourceTree = "<group>"; };
 		045F203B2100FCB60007C703 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		045F203D2100FDC70007C703 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04758FE4214A150C006A1E18 /* MeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 				04B39F90212F07F3002FA45C /* DatabaseService.swift */,
 				047B2D202136F7A100829557 /* Requests.swift */,
 				04FD73B42141F71600F89636 /* User.swift */,
+				045D7C5A215A883700B4B9AF /* AcceptedEvents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,6 +157,7 @@
 				0424AB9520F8C92B006DF2F5 /* EventCell.swift */,
 				04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */,
 				04CF3CDE2136160A0060C83E /* RequestCell.swift */,
+				045D7C5E215AA18100B4B9AF /* AcceptedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 				04CF3CDA213615530060C83E /* RequestsVC.swift */,
 				047A25522136409A00F38E09 /* EventComposerVC.swift */,
 				04758FE4214A150C006A1E18 /* MeVC.swift */,
+				045D7C60215C187000B4B9AF /* AcceptedRequesterVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -398,11 +407,14 @@
 				04CF3CDB213615530060C83E /* RequestsVC.swift in Sources */,
 				04FD73B52141F71600F89636 /* User.swift in Sources */,
 				0435CB7E21016A8700A22286 /* GFBase32Utils.m in Sources */,
+				045D7C5B215A883700B4B9AF /* AcceptedEvents.swift in Sources */,
 				04B39F8F212F0763002FA45C /* pushLocation.swift in Sources */,
+				045D7C61215C187100B4B9AF /* AcceptedRequesterVC.swift in Sources */,
 				047B2D212136F7A100829557 /* Requests.swift in Sources */,
 				04758FE5214A150C006A1E18 /* MeVC.swift in Sources */,
 				0435CB7F21016A8700A22286 /* GFGeoHash.m in Sources */,
 				04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */,
+				045D7C5F215AA18100B4B9AF /* AcceptedCell.swift in Sources */,
 				0424AB9420F8C8D2006DF2F5 /* EventsVC.swift in Sources */,
 				0435CB7D21016A8700A22286 /* GeoFire.m in Sources */,
 				04C9668B2129C12000743E76 /* TabBarVC.swift in Sources */,

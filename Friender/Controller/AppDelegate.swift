@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        GMSServices.provideAPIKey("AIzaSyDY9TgCvAwl7X9tpvCjsd9WGqYNJo6jl7Q")
-        GMSPlacesClient.provideAPIKey("AIzaSyDY9TgCvAwl7X9tpvCjsd9WGqYNJo6jl7Q")
+        GMSServices.provideAPIKey("AIzaSyBb0jIeePh65TPj4cBuzlYG3TvGTxA9eNk")
+        GMSPlacesClient.provideAPIKey("AIzaSyBb0jIeePh65TPj4cBuzlYG3TvGTxA9eNk")
         setRootViewController()
         
         return true

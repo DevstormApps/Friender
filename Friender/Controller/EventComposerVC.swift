@@ -29,6 +29,7 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     fileprivate var ref: DatabaseReference!
     fileprivate var storageRef: StorageReference!
     fileprivate var storageUploadTask: StorageUploadTask!
+    fileprivate var endDate: TimeInterval!
     let color = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0)
     
     var eventCoords: CLLocationCoordinate2D?
@@ -137,8 +138,7 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
         let event = Event(imagePath: storageImagePath, title: title, addedBy: GIDSignIn.sharedInstance().currentUser.profile.name, key: user!.uid)
         // Create the unicorn and record it
         writeEventToDatabase(event)
-        ref.child("events").child(user!.uid).child("timestamp").setValue(ServerValue.timestamp())
-        ref.child("events").child(user!.uid).child("duration").setValue(Int(3000000))
+        ref.child("events").child(user!.uid).child("endDate").setValue(endDate)
         pushLocation.instance.pushAnnotationLocation(eventCoords!)
     }
     
@@ -149,20 +149,22 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func datePickerWasPressed(_ sender: Any) {
         let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
+        datePicker.datePickerMode = .dateAndTime
         
         let alert = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
         alert.view.addSubview(datePicker)
 
         
-        let ok = UIAlertAction(title: "确定", style: .default) { (action) in
+        let ok = UIAlertAction(title: "ok", style: .default) { (action) in
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let dateString = dateFormatter.string(from: datePicker.date)
-            print(dateString)
+            
+            dateFormatter.dateStyle = DateFormatter.Style.short
+            dateFormatter.timeStyle = DateFormatter.Style.short
+            self.endDate = datePicker.date.timeIntervalSince1970
+
         }
         
-        let cancel = UIAlertAction(title: "取消", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
         
         alert.addAction(ok)
         alert.addAction(cancel)

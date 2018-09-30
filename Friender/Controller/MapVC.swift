@@ -16,7 +16,7 @@ import GoogleSignIn
 import GoogleMaps
 import GooglePlaces
 
-class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchDisplayDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -26,9 +26,15 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     var storageRef: StorageReference!
     var storageDownloadTask: StorageDownloadTask!
     var eventCoords: CLLocationCoordinate2D?
+    
+    var resultsViewController: GMSAutocompleteResultsViewController?
+    var searchController: UISearchController?
+    var resultView: UITextView?
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareSearchBar()
         manager = CLLocationManager()
         manager?.delegate = self
         manager?.desiredAccuracy = kCLLocationAccuracyBest
@@ -40,6 +46,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        centerOnMap()
         loadAnnotation()
     }
     
@@ -49,6 +56,31 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
         } else {
             manager?.requestAlwaysAuthorization()
         }
+    }
+    
+    func centerOnMap() {
+        mapView.camera = GMSCameraPosition.camera(withTarget: (manager?.location?.coordinate)!, zoom: 14.0) // show your device location on map
+
+    }
+    
+   
+    func prepareSearchBar() {
+        resultsViewController = GMSAutocompleteResultsViewController()
+        resultsViewController?.delegate = self
+        
+        searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController?.searchResultsUpdater = resultsViewController
+        
+        // Put the search bar in the navigation bar.
+        searchController?.searchBar.sizeToFit()
+        navigationItem.titleView = searchController?.searchBar
+        
+        // When UISearchController presents the results view, present it in
+        // this view controller, not one further up the chain.
+        definesPresentationContext = true
+        
+        // Prevent the navigation bar from being hidden when searching.
+        searchController?.hidesNavigationBarDuringPresentation = false
     }
     
     func loadAnnotation() {
@@ -66,10 +98,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
                                     if let data = data {
                                     let image = UIImage(data: data)
 
-//                                    let anno = Anno(coordinate: eventCoordinate, key: event.key, image: image!)
-//                                    self.mapView.addAnnotation(anno)
-//                                        self.showRouteOnMap(pickupCoordinate: self.mapView.userLocation.coordinate, destinationCoordinate: eventCoordinate)
-//                                }
                             let marker = GMSMarker()
                             marker.position = eventCoordinate
                             let croppedImage = image!.cropsToSquare()
@@ -112,29 +140,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
         }
     }
     
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if let = annotation as? Anno {
-//            let identifier = "userAnnotation"
-//            let view: MKAnnotationView
-//            view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-//            let image = annotation.image
-//            let croppedImage = image.cropsToSquare()
-//            let size = CGSize(width: 30, height: 30)
-//            UIGraphicsBeginImageContext(size)
-//            croppedImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-//            let pinImage = UIGraphicsGetImageFromCurrentImageContext()
-//            view.contentMode = .scaleAspectFill
-//            view.layer.cornerRadius = (pinImage?.size.width)! / 2
-//            view.clipsToBounds = true
-//            view.image = pinImage
-//
-//
-//            return view
-//
-//        }
-//        return nil
-//    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToEventComposer" {
             if let destinationVC = segue.destination as? EventComposerVC {
@@ -162,4 +167,31 @@ extension UIImage {
         return cropped
     }
 
+}
+
+// Handle the user's selection.
+extension MapVC: GMSAutocompleteResultsViewControllerDelegate {
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didAutocompleteWith place: GMSPlace) {
+        searchController?.isActive = false
+        // Do something with the selected place.
+        print("Place name: \(place.name)")
+        print("Place address: \(place.formattedAddress)")
+        print("Place attributions: \(place.attributions)")
+    }
+    
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didFailAutocompleteWithError error: Error){
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
 }

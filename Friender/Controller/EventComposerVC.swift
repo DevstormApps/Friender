@@ -30,6 +30,7 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     fileprivate var storageRef: StorageReference!
     fileprivate var storageUploadTask: StorageUploadTask!
     fileprivate var endDate: TimeInterval!
+    fileprivate var imageData: Data!
     let color = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0)
     
     var eventCoords: CLLocationCoordinate2D?
@@ -60,9 +61,9 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Functions
-    fileprivate func writeEventToDatabase(_ event: Event) {
+    fileprivate func writeEventToDatabase(_ event: Event, _ autoID: DatabaseReference) {
         // Access the "unicorns" child reference and then access (create) a unique child reference within it and finally set its value
-        ref.child("events").child(user!.uid).setValue(event.toAnyObject())
+        autoID.setValue(event.toAnyObject())
     }
     
     fileprivate func uploadSuccess(_ storagePath: String) {
@@ -135,11 +136,49 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     @IBAction func addEventButtonWasPressed(_ sender: Any) {
         // Get properties for the unicorn-to-be-created
         let title = self.eventTitleTextField.text ?? ""
-        let event = Event(imagePath: storageImagePath, title: title, addedBy: GIDSignIn.sharedInstance().currentUser.profile.name, key: user!.uid)
+        let eventRef = ref.child("events").child(user!.uid).childByAutoId()
+        let autoID = eventRef.key
+        // 2. Create a unique image path for image. In the case I am using the googleAppId of my account appended to the interval between 00:00:00 UTC on 1 January 2001 and the current date and time as an Integer and then I append .jpg. You can use whatever you prefer as long as it ends up unique.
+        let storageRef = Storage.storage().reference()
+        let uid = user?.uid
+        let imagePath = storageRef.child("/events/"+(autoID)+"/event_pic.jpg")
+        
+        // 3. Set up metadata with appropriate content type
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        // 4. Show activity indicator
+        showNetworkActivityIndicator = true
+        // To make the activity indicator appear:
+        let activityIndicator = MDCActivityIndicator()
+        activityIndicator.sizeToFit()
+        activityIndicator.cycleColors = [.blue, .red, .green, .yellow]
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+        
+        // To make the activity indicator appear:
+        activityIndicator.startAnimating()
+        // 5. Start upload task
+        
+        storageUploadTask = imagePath.putData(imageData, metadata: metadata, completion: { (metadata, error) in
+            // 6. Hide activity indicator because uploading is done with or without an error
+            self.showNetworkActivityIndicator = false
+            // To make the activity indicator disappear:
+            activityIndicator.stopAnimating()
+            
+            guard error == nil else {
+                print("Error uploading: \(error!)")
+                return
+            }
+            
+            self.uploadSuccess(uid!)
+        })
+        
+        let event = Event(imagePath: autoID, title: title, addedBy: (GIDSignIn.sharedInstance()?.currentUser.profile.name)!, key: autoID, userPicture: (user?.uid)!)
         // Create the unicorn and record it
-        writeEventToDatabase(event)
-        ref.child("events").child(user!.uid).child("endDate").setValue(endDate)
-        pushLocation.instance.pushAnnotationLocation(eventCoords!)
+        writeEventToDatabase(event, eventRef)
+        ref.child("events").child(user!.uid).child(autoID).child("endDate").setValue(endDate)
+        pushLocation.instance.pushAnnotationLocation(eventCoords!, key: autoID)
     }
     
     @IBAction func addImageButtonWasPressed(_ sender: Any) {
@@ -194,44 +233,13 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 
                 return
         }
-        
         eventImage.image = image
-        
-        // 2. Create a unique image path for image. In the case I am using the googleAppId of my account appended to the interval between 00:00:00 UTC on 1 January 2001 and the current date and time as an Integer and then I append .jpg. You can use whatever you prefer as long as it ends up unique.
-        let ref = Storage.storage().reference()
-        let uid = user?.uid
-        let imagePath = ref.child("/events/"+(user?.uid)!+"/event_pic.jpg")
-        
-        // 3. Set up metadata with appropriate content type
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-        
-        // 4. Show activity indicator
-        showNetworkActivityIndicator = true
-        // To make the activity indicator appear:
-        let activityIndicator = MDCActivityIndicator()
-        activityIndicator.sizeToFit()
-        activityIndicator.cycleColors = [.blue, .red, .green, .yellow]
-        activityIndicator.center = view.center
-        view.addSubview(activityIndicator)
-        
-        // To make the activity indicator appear:
-        activityIndicator.startAnimating()
-        // 5. Start upload task
-        
-        storageUploadTask = imagePath.putData(imageData, metadata: metadata, completion: { (metadata, error) in
-            // 6. Hide activity indicator because uploading is done with or without an error
-            self.showNetworkActivityIndicator = false
-            // To make the activity indicator disappear:
-            activityIndicator.stopAnimating()
-            
-                        guard error == nil else {
-                print("Error uploading: \(error!)")
-                return
-            }
-
-            self.uploadSuccess(uid!)
-        })
+        self.imageData = imageData
+        if eventImage.image != nil && eventTitleTextField.text != "" {
+            addEventButton.isUserInteractionEnabled = true
+            addEventButton.isEnabled = true
+            addEventButton.alpha = 1
+        }
     
 }
     

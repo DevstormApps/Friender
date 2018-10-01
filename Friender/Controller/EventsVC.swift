@@ -43,8 +43,10 @@ class EventsVC: UIViewController, UICollectionViewDataSource {
         ref.child("events").observe(.value) { snapshot in
             var events = [Event]()
             for eventSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
-            let event = Event(snapshot: eventSnapshot)
-                events.append(event)
+                for userEventSnapshot in eventSnapshot.children.allObjects as! [DataSnapshot] {
+                    let event = Event(snapshot: userEventSnapshot)
+                    events.append(event)
+                }
             }
             self.events = events
         }

@@ -29,18 +29,20 @@ class EventCell: UICollectionViewCell {
                 downloadImage(from: event.imagePath)
                 eventTitle.text = event.title
                 username.text = event.addedBy
-                downloadProfileImage(from: event.key)
+                downloadProfileImage(from: event.userPicture)
             }
         }
     }
     
     @IBAction func requestButtonWasPressed(_ sender: Any) {
             let ref = Database.database().reference()
-        ref.child("requests").child((event?.key)!).child(user!.uid).child("isRequesterAccepted").setValue(false)
+        ref.child("requests").child((event?.userPicture)!).child(event!.key).child(user!.uid).child("isRequesterAccepted").setValue(false)
             let name = GIDSignIn.sharedInstance().currentUser.profile.name
-        ref.child("requests").child((event?.key)!).child(user!.uid).child("name").setValue(name)
-        ref.child("requests").child((event?.key)!).child(user!.uid).child("key").setValue(String(user!.uid))
-        ref.child("requests").child((event?.key)!).child(user!.uid).child("profile_picture").setValue(String(user!.uid))
+        ref.child("requests").child((event?.userPicture)!).child(event!.key).child(user!.uid).child("name").setValue(name)
+        ref.child("requests").child((event?.userPicture)!).child(event!.key).child(user!.uid).child("key").setValue(String(user!.uid))
+    ref.child("requests").child((event?.userPicture)!).child(event!.key).child(user!.uid).child("profile_picture").setValue(String(user!.uid))
+        ref.child("requests").child((event?.userPicture)!).child(event!.key).child(user!.uid).child("eventKey").setValue(event?.key)
+        
         }
 
     func downloadImage(from storageImagePath: String) {

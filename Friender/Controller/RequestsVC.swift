@@ -38,9 +38,11 @@ class RequestsVC: UITableViewController {
 
             var requests = [Requests]()
             for requestSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
-                
-                let request = Requests(snapshot: requestSnapshot)
-                requests.append(request)
+                for userRequestSnapshot in requestSnapshot.children.allObjects as! [DataSnapshot] {
+                    let request = Requests(snapshot: userRequestSnapshot)
+                    requests.append(request)
+                }
+               
             }
             self.requests = requests
         }

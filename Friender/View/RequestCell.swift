@@ -67,15 +67,17 @@ class RequestCell: UITableViewCell {
     @IBAction func acceptButtonWasPressed(_ sender: Any) {
         let ref = Database.database().reference()
         
-        ref.child("requests").child(user!.uid).child((request?.key)!).child("isRequesterAccepted").setValue(true)
+        ref.child("requests").child(user!.uid).child((request?.eventKey)!).child((request?.key)!).child("isRequesterAccepted").setValue(true)
         
-        DatabaseService.instance.events.child((user?.uid)!).observeSingleEvent(of: .value) { (snapshot) in
+        DatabaseService.instance.events.child((user?.uid)!).child((request?.eventKey)!).observeSingleEvent(of: .value) { (snapshot) in
             
             let snapshotValue = snapshot.value as! Dictionary<String, AnyObject>
-
+            let snapshotKey = snapshot.value as! [String: AnyObject]
             let coordinateArray = snapshotValue["coordinate"] as! NSArray
-        ref.child("acceptedEventRequesters").child((self.request?.key)!).child((user?.uid)!).child("coordinate").setValue(coordinateArray)
-            ref.child("acceptedEventRequesters").child((self.request?.key)!).child((user?.uid)!).child("imagePath").setValue((self.request?.key)!)
+            let key = snapshotKey["key"] as! String
+            ref.child("acceptedEventRequesters").child((self.request?.key)!).child(self.request!.eventKey).child((user?.uid)!).child(key).child("coordinate").setValue(coordinateArray)
+            ref.child("acceptedEventRequesters").child((self.request?.key)!).child((self.request?.eventKey)!).child((user?.uid)!).child(key).child("imagePath").setValue((self.request?.key)!)
+            ref.child("acceptedEventRequesters").child((self.request?.key)!).child((self.request?.eventKey)!).child((user?.uid)!).child(key).child("eventKey").setValue(self.request?.eventKey)
                 }
         }
 

@@ -16,10 +16,12 @@ class AcceptedEvents {
     
     var image: String
     var coordinate: NSArray
+    var eventKey: String
     
-    init(image: String, coordinate: NSArray) {
+    init(image: String, coordinate: NSArray, eventKey: String) {
         self.image = image
         self.coordinate = coordinate
+        self.eventKey = eventKey
     }
     
     init(snapshot: DataSnapshot) {
@@ -27,6 +29,7 @@ class AcceptedEvents {
         let coordinateDict = snapshot.value as! Dictionary<String, AnyObject>
         image = snapshotValue["imagePath"] as! String
         coordinate = coordinateDict["coordinate"] as! NSArray
+        eventKey = snapshotValue["eventKey"] as! String
     }
     
 }

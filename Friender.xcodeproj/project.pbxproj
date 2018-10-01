@@ -24,7 +24,6 @@
 		04758FE5214A150C006A1E18 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04758FE4214A150C006A1E18 /* MeVC.swift */; };
 		047A25532136409A00F38E09 /* EventComposerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A25522136409A00F38E09 /* EventComposerVC.swift */; };
 		047B2D212136F7A100829557 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B2D202136F7A100829557 /* Requests.swift */; };
-		04B39F8D212DC110002FA45C /* Anno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F8C212DC10F002FA45C /* Anno.swift */; };
 		04B39F8F212F0763002FA45C /* pushLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F8E212F0762002FA45C /* pushLocation.swift */; };
 		04B39F91212F07F3002FA45C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B39F90212F07F3002FA45C /* DatabaseService.swift */; };
 		04C966872126CA0800743E76 /* EventCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */; };
@@ -68,7 +67,6 @@
 		04758FE4214A150C006A1E18 /* MeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
 		047A25522136409A00F38E09 /* EventComposerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventComposerVC.swift; sourceTree = "<group>"; };
 		047B2D202136F7A100829557 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
-		04B39F8C212DC10F002FA45C /* Anno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anno.swift; sourceTree = "<group>"; };
 		04B39F8E212F0762002FA45C /* pushLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pushLocation.swift; sourceTree = "<group>"; };
 		04B39F90212F07F3002FA45C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		04C966862126CA0800743E76 /* EventCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				043FC8D120FFC6150053EC28 /* Event.swift */,
-				04B39F8C212DC10F002FA45C /* Anno.swift */,
 				04B39F8E212F0762002FA45C /* pushLocation.swift */,
 				04B39F90212F07F3002FA45C /* DatabaseService.swift */,
 				047B2D202136F7A100829557 /* Requests.swift */,
@@ -397,7 +394,6 @@
 			files = (
 				04B39F91212F07F3002FA45C /* DatabaseService.swift in Sources */,
 				045F203C2100FCB70007C703 /* SignInVC.swift in Sources */,
-				04B39F8D212DC110002FA45C /* Anno.swift in Sources */,
 				0452D42E20517AE70093F72B /* MapVC.swift in Sources */,
 				0424AB9620F8C92B006DF2F5 /* EventCell.swift in Sources */,
 				04F0BAF920507D4300221642 /* AppDelegate.swift in Sources */,

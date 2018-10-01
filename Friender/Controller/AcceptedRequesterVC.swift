@@ -42,8 +42,12 @@ class AcceptedRequesterVC: UIViewController, UICollectionViewDataSource {
         ref.child("acceptedEventRequesters").child(user!.uid).observe(.value) { snapshot in
             var acceptedEvents = [AcceptedEvents]()
             for acceptedSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
-                let acceptedEvent = AcceptedEvents(snapshot: acceptedSnapshot)
-                acceptedEvents.append(acceptedEvent)
+                for userAcceptedSnapshot in acceptedSnapshot.children.allObjects as! [DataSnapshot] {
+                    for thirdSnapshot in userAcceptedSnapshot.children.allObjects as! [DataSnapshot] {
+                        let acceptedEvent = AcceptedEvents(snapshot: thirdSnapshot)
+                        acceptedEvents.append(acceptedEvent)
+                    }
+                }
             }
             self.acceptedEvents = acceptedEvents
         }

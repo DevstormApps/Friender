@@ -27,6 +27,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UI
     var storageDownloadTask: StorageDownloadTask!
     var eventCoords: CLLocationCoordinate2D?
     
+    var placesClient : GMSPlacesClient?
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var resultView: UITextView?
@@ -41,12 +42,12 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UI
         mapView.delegate = self
         checkAuthorizationStatus()
         storageRef = Storage.storage().reference()
+        let ref = Database.database().reference()
         loadAnnotation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        centerOnMap()
         loadAnnotation()
     }
     
@@ -58,16 +59,10 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UI
         }
     }
     
-    func centerOnMap() {
-        mapView.camera = GMSCameraPosition.camera(withTarget: (manager?.location?.coordinate)!, zoom: 14.0) // show your device location on map
-
-    }
-    
-   
     func prepareSearchBar() {
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
-        
+       
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         
@@ -84,37 +79,35 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UI
     }
     
     func loadAnnotation() {
-
-        DatabaseService.instance.acceptedEventRequesters.child((user?.uid)!).observeSingleEvent(of: .value) { (snapshot) in
-            if let eventSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                for event in eventSnapshot {
-                    if event.hasChild("coordinate") {
-                        if let eventDict = event.value as? Dictionary<String, AnyObject> {
-                            let coordinateArray = eventDict["coordinate"] as! NSArray
+        ref.child("acceptedEventRequesters").child(user!.uid).observe(.value) { snapshot in
+            for acceptedSnapshot in snapshot.children.allObjects as! [DataSnapshot] {
+                for userAcceptedSnapshot in acceptedSnapshot.children.allObjects as! [DataSnapshot] {
+                    for thirdSnapshot in userAcceptedSnapshot.children.allObjects as! [DataSnapshot] {
+                        let coordinateDict = thirdSnapshot.value as! Dictionary<String, AnyObject>
+                            let coordinateArray = coordinateDict["coordinate"] as! NSArray
                             let eventCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
-                                    let path = self.storageRef.child("/User Profile Pictures/"+(event.key)+"/profile_pic.jpg")
-
-                                    self.storageDownloadTask = path.getData(maxSize: 1024 * 1024 * 12, completion: { (data, error) in
-                                    if let data = data {
+                            let path = self.storageRef.child("/User Profile Pictures/"+(userAcceptedSnapshot.key)+"/profile_pic.jpg")
+                            
+                            self.storageDownloadTask = path.getData(maxSize: 1024 * 1024 * 12, completion: { (data, error) in
+                                if let data = data {
                                     let image = UIImage(data: data)
-
-                            let marker = GMSMarker()
-                            marker.position = eventCoordinate
-                            let croppedImage = image!.cropsToSquare()
-                            let pinImage = self.imageWithImage(image: croppedImage, scaledToSize:CGSize(width: 35.0, height: 35.0))
-                            let markerView = UIImageView(image: pinImage)
-                            markerView.layer.cornerRadius = markerView.bounds.size.width / 2
-                            markerView.clipsToBounds = true
-                            marker.iconView = markerView
-                            marker.map = self.mapView
+                                    
+                                    let marker = GMSMarker()
+                                    marker.position = eventCoordinate
+                                    let croppedImage = image!.cropsToSquare()
+                                    let pinImage = self.imageWithImage(image: croppedImage, scaledToSize:CGSize(width: 35.0, height: 35.0))
+                                    let markerView = UIImageView(image: pinImage)
+                                    markerView.layer.cornerRadius = markerView.bounds.size.width / 2
+                                    markerView.clipsToBounds = true
+                                    marker.iconView = markerView
+                                    marker.map = self.mapView
                                 }
                             })
                         }
+
                     }
                 }
             }
-        }
-        
     }
     
     func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
@@ -171,13 +164,16 @@ extension UIImage {
 
 // Handle the user's selection.
 extension MapVC: GMSAutocompleteResultsViewControllerDelegate {
+
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = false
         // Do something with the selected place.
+     
+        mapView.camera = GMSCameraPosition.camera(withTarget: (place.coordinate), zoom: 14.0)
         print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+        print("Place address: \(String(describing: place.formattedAddress))")
+        print("Place attributions: \(String(describing: place.attributions))")
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,

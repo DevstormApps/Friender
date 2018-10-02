@@ -10,6 +10,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import Firebase
+import GoogleSignIn
 
 class MeVC: UIViewController {
 
@@ -52,8 +53,11 @@ class MeVC: UIViewController {
     @IBAction func logout(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
+            GIDSignIn.sharedInstance().signOut()
+            GIDSignIn.sharedInstance().disconnect()
             try firebaseAuth.signOut()
-           // performSegue(withIdentifier: "goBackToSignIn", sender: self)
+            performSegue(withIdentifier: "goBackToSignIn", sender: self)
+
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }

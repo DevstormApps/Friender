@@ -23,6 +23,10 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var eventTitleTextField: MDCTextField!
     @IBOutlet weak var addImageButton: UIBarButtonItem!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var fromButton: UILabel!
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var toButton: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
     
     fileprivate let picker = UIImagePickerController()
     fileprivate var storageImagePath = ""
@@ -30,9 +34,13 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     fileprivate var storageRef: StorageReference!
     fileprivate var storageUploadTask: StorageUploadTask!
     fileprivate var endDate: TimeInterval!
+    fileprivate var startDate: TimeInterval!
     fileprivate var imageData: Data!
-    let color = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0)
+    fileprivate var endDateWasSet: Date!
+    fileprivate var startDateWasSet: Date = Date()
     
+    let color = UIColor(red:0.65, green:0.42, blue:0.95, alpha:1.0)
+   
     var eventCoords: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
@@ -47,10 +55,66 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
         addEventButton.isUserInteractionEnabled = false
         addEventButton.isEnabled = false
         addEventButton.alpha = 0.5
-       
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapFunction))
+        let toButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.tapFunctionToButton))
+        
+        fromButton.isUserInteractionEnabled = true
+        fromButton.addGestureRecognizer(tap)
+        toButton.isUserInteractionEnabled = true
+        toButton.addGestureRecognizer(toButtonTap)
+
         self.setupHideKeyboardOnTap()
 
 
+    }
+    
+    @objc
+    func tapFunction(sender:UITapGestureRecognizer) {
+        let DatePicker = UIDatePicker()
+        DatePicker.datePickerMode = .dateAndTime
+        if endDateWasSet != nil {
+            DatePicker.maximumDate = endDateWasSet
+        }
+        let alert = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
+        alert.view.addSubview(DatePicker)
+        
+        
+        let ok = UIAlertAction(title: "ok", style: .default) { (action) in
+            
+            self.startDate = DatePicker.date.timeIntervalSince1970
+            self.startDateWasSet = DatePicker.date
+        }
+        
+        let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc
+    
+    func tapFunctionToButton(sender:UITapGestureRecognizer) {
+        let DatePicker = UIDatePicker()
+        DatePicker.datePickerMode = .dateAndTime
+        DatePicker.minimumDate = startDateWasSet
+        let alert = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
+        alert.view.addSubview(DatePicker)
+        
+        
+        let ok = UIAlertAction(title: "ok", style: .default) { (action) in
+            
+            self.endDate = DatePicker.date.timeIntervalSince1970
+            self.endDateWasSet = DatePicker.date
+        }
+        
+        let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     // Setup for activity indicator to be shown when uploading image
@@ -183,32 +247,6 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func addImageButtonWasPressed(_ sender: Any) {
         showActionSheet()
-    }
-    
-    
-    @IBAction func datePickerWasPressed(_ sender: Any) {
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .dateAndTime
-        
-        let alert = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
-        alert.view.addSubview(datePicker)
-
-        
-        let ok = UIAlertAction(title: "ok", style: .default) { (action) in
-            let dateFormatter = DateFormatter()
-            
-            dateFormatter.dateStyle = DateFormatter.Style.short
-            dateFormatter.timeStyle = DateFormatter.Style.short
-            self.endDate = datePicker.date.timeIntervalSince1970
-
-        }
-        
-        let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
-        
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
     }
     
 }

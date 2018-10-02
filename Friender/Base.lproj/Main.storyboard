@@ -147,15 +147,47 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBr-MM-zQn" customClass="MDCTextField">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="3e0-pK-wgy"/>
+                                        </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6dp-1S-6Jw">
-                                        <rect key="frame" x="0.0" y="60" width="300" height="282"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="282" id="SiN-yn-Ssi"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="60" width="300" height="258"/>
                                     </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8gy-5k-wDz">
+                                        <rect key="frame" x="0.0" y="328" width="300" height="20"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-59-00v">
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/3/4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCK-pO-7v5">
+                                                <rect key="frame" x="75" y="0.0" width="75" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcn-AK-g02">
+                                                <rect key="frame" x="150" y="0.0" width="75" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/3/4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1B-xv-zae">
+                                                <rect key="frame" x="225" y="0.0" width="75" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="meK-bb-Er3"/>
+                                        </constraints>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bks-KR-8Us">
-                                        <rect key="frame" x="0.0" y="352" width="300" height="36"/>
+                                        <rect key="frame" x="0.0" y="358" width="300" height="30"/>
                                         <color key="backgroundColor" red="0.64705882349999999" green="0.42352941179999998" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -187,25 +219,22 @@
                         <viewLayoutGuide key="safeArea" id="oPg-rW-vS3"/>
                     </view>
                     <navigationItem key="navigationItem" title="Compose Event" id="525-v7-LVe">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="camera" id="8Nf-TT-jhV">
-                                <connections>
-                                    <action selector="addImageButtonWasPressed:" destination="XoT-PQ-4nO" id="dm1-R6-9X2"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Date Picker" id="YUc-4Y-vX5">
-                                <connections>
-                                    <action selector="datePickerWasPressed:" destination="XoT-PQ-4nO" id="Wxr-dG-KVf"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="8Nf-TT-jhV">
+                            <connections>
+                                <action selector="addImageButtonWasPressed:" destination="XoT-PQ-4nO" id="dm1-R6-9X2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addEventButton" destination="bks-KR-8Us" id="n1l-G4-qGF"/>
                         <outlet property="addImageButton" destination="8Nf-TT-jhV" id="BEU-Lc-N1H"/>
+                        <outlet property="endDateLabel" destination="K1B-xv-zae" id="bdL-Ml-7G2"/>
                         <outlet property="eventImage" destination="6dp-1S-6Jw" id="TC8-FL-L4c"/>
                         <outlet property="eventTitleTextField" destination="DBr-MM-zQn" id="rm2-qU-gnw"/>
+                        <outlet property="fromButton" destination="gUa-59-00v" id="x7o-Ch-3Pr"/>
                         <outlet property="progressView" destination="JFs-I1-Yqv" id="Ime-OG-otI"/>
+                        <outlet property="startDateLabel" destination="gUa-59-00v" id="nJL-Rj-iAm"/>
+                        <outlet property="toButton" destination="zcn-AK-g02" id="pcf-iF-tSc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rls-S8-Im4" userLabel="First Responder" sceneMemberID="firstResponder"/>

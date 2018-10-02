@@ -42,7 +42,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UI
         mapView.delegate = self
         checkAuthorizationStatus()
         storageRef = Storage.storage().reference()
-        let ref = Database.database().reference()
         loadAnnotation()
     }
     

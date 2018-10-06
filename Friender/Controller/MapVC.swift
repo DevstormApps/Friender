@@ -42,7 +42,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UI
         mapView.delegate = self
         checkAuthorizationStatus()
         storageRef = Storage.storage().reference()
-        loadAnnotation()
     }
     
     override func viewWillAppear(_ animated: Bool) {

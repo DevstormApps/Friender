@@ -48,25 +48,13 @@ class EventCell: UICollectionViewCell {
     func downloadImage(from storageImagePath: String) {
         let path = storageRef.child("/events/"+(storageImagePath)+"/event_pic.jpg")
         
-        path.getData(maxSize: 1024 * 1024 * 12) { (data, error) in
-            if let data = data {
-                let image = UIImage(data: data)
-                self.eventImage.image = image
-            }
-        }
-              // self.eventImage.sd_setImage(with: path)
+       self.eventImage.sd_setImage(with: path)
     }
     
     func downloadProfileImage(from profileImagePath: String) {
         let path = self.storageRef.child("/User Profile Pictures/"+(profileImagePath)+"/profile_pic.jpg")
         
-        path.getData(maxSize: 1024 * 1024 * 12) { (data, error) in
-            if let data = data {
-                let image = UIImage(data: data)
-                self.profileImage.image = image
-            }
-        }
-      //  self.eventImage.sd_setImage(with: path)
+       self.profileImage.sd_setImage(with: path)
 
     }
     

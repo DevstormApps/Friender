@@ -83,6 +83,7 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
             
             self.startDate = DatePicker.date.timeIntervalSince1970
             self.startDateWasSet = DatePicker.date
+            self.checkForCompletion()
         }
         
         let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
@@ -107,6 +108,7 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
             
             self.endDate = DatePicker.date.timeIntervalSince1970
             self.endDateWasSet = DatePicker.date
+            self.checkForCompletion()
         }
         
         let cancel = UIAlertAction(title: "cancel", style: .default, handler: nil)
@@ -181,22 +183,28 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
         self.present(actionSheet, animated: true, completion: nil)
         
     }
-    
-    
-     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if eventTitleTextField.text != "" && eventImage.image != nil {
+    func checkForCompletion() {
+        if eventTitleTextField.text != "" && eventImage.image != nil && endDate != nil && startDate != nil {
             addEventButton.isUserInteractionEnabled = true
             addEventButton.isEnabled = true
             addEventButton.alpha = 1
-
+            
         } else {
             addEventButton.isUserInteractionEnabled = false
             addEventButton.isEnabled = false
             addEventButton.alpha = 0.5
-
+            
         }
-        }
+    }
     
+     func textFieldDidBeginEditing(_ textField: UITextField) {
+       checkForCompletion()
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+       checkForCompletion()
+    }
     @IBAction func addEventButtonWasPressed(_ sender: Any) {
         // Get properties for the unicorn-to-be-created
         let title = self.eventTitleTextField.text ?? ""
@@ -242,6 +250,7 @@ class EventComposerVC: UIViewController, UITextFieldDelegate {
         // Create the unicorn and record it
         writeEventToDatabase(event, eventRef)
         ref.child("events").child(user!.uid).child(autoID).child("endDate").setValue(endDate)
+        ref.child("events").child(user!.uid).child(autoID).child("startDate").setValue(startDate)
         pushLocation.instance.pushAnnotationLocation(eventCoords!, key: autoID)
     }
     
@@ -273,11 +282,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         }
         eventImage.image = image
         self.imageData = imageData
-        if eventImage.image != nil && eventTitleTextField.text != "" {
-            addEventButton.isUserInteractionEnabled = true
-            addEventButton.isEnabled = true
-            addEventButton.alpha = 1
-        }
+       checkForCompletion()
     
 }
     

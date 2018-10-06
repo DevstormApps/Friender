@@ -30,6 +30,7 @@ class MeVC: UIViewController {
         
         let ref = Storage.storage().reference()
         let path = ref.child("/User Profile Pictures/"+(user?.uid)!+"/profile_pic.jpg")
+        
         profileImage.sd_setImage(with: path)
 
         // Do any additional setup after loading the view.
@@ -54,13 +55,12 @@ class MeVC: UIViewController {
         let firebaseAuth = Auth.auth()
         do {
             GIDSignIn.sharedInstance().signOut()
-            GIDSignIn.sharedInstance().disconnect()
             try firebaseAuth.signOut()
             performSegue(withIdentifier: "goBackToSignIn", sender: self)
 
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-        
+       
     }
 }
